@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     // gets player location
     transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
     
-    // checks if ship has is stationary before moving
+    // checks if ship is stationary before moving
     if(Vector3.Distance(transform.position, movePoint.position) <= .05f)
     {
       // checks for horizontal movement and enacts

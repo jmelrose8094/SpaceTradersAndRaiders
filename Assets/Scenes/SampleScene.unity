@@ -135,7 +135,7 @@ GameObject:
   m_Layer: 0
   m_Name: movePoint
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -423,11 +423,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 504956542757383274, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.420763
+      value: -3.501
       objectReference: {fileID: 0}
     - target: {fileID: 504956542757383274, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.44557253
+      value: 1.502
       objectReference: {fileID: 0}
     - target: {fileID: 504956542757383274, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -465,6 +465,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 504956542757383274, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.24132164
+      objectReference: {fileID: 0}
+    - target: {fileID: 504956542757383274, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.251692
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885320389654881682, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 64c46f7bb4b5841479dcd410e688339d, type: 3}
     - target: {fileID: 5507881198803897553, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -511,6 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  moveCount: 1
   movePoint: {fileID: 127790004}
   whatStopsMovement:
     serializedVersion: 2
