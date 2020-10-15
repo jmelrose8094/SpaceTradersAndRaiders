@@ -10,8 +10,12 @@ public class EndTurn : MonoBehaviour
 
     public Text Textfield;
     public GameObject shipRef;
+    public PlayerController playerConRef = new playerConRef();
     public Vector3 orgPos;
-    
+
+
+   
+
     //Basic function that sets the text of a text box
     public void SetText(string text)
     {
@@ -19,9 +23,11 @@ public class EndTurn : MonoBehaviour
 
     }
 
+    //Basic Function that resets the position of the ship to its starting position
     public void resetShip()
     {
         shipRef.transform.position = orgPos;
+        playerConRef.movePoint = orgPos;
     }
 
     //public void IncTurn()
@@ -34,6 +40,7 @@ public class EndTurn : MonoBehaviour
     {
 
         shipRef = GameObject.Find("p_ship");
+        
         orgPos = shipRef.transform.position;
         
     }

@@ -6,9 +6,14 @@ public class PlayerController : MonoBehaviour
 {
   // TODO: call to player for number of engines and set moveCount
   public float moveSpeed = 5f, moveCount = 1f;
-  public Transform movePoint;
+  public Transform movePoint { get; set; }
   
   public LayerMask whatStopsMovement;
+
+  public PlayerController()
+  {
+        movePoint = this.transform;
+  }
   
   void Start()
   {
