@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         // makes movePoint independant
         //movePoint = GameObject.Find("p_ship").transform;
         movePoint.parent = null;
-        orgPoint = movePoint;
+        orgPoint.position = movePoint.position;
   }
   
   
@@ -48,6 +48,6 @@ public class PlayerController : MonoBehaviour
   
   public void resetShipPosition()
   {
-    movePoint = orgPoint;
+    movePoint.position = orgPoint.position;
   }
 }
