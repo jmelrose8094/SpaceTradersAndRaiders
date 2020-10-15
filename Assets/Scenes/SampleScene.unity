@@ -2966,6 +2966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Textfield: {fileID: 326487612}
   shipRef: {fileID: 0}
+  playerConRef: {fileID: 0}
   orgPos: {x: 0, y: 0, z: 0}
 --- !u!114 &2007391074
 MonoBehaviour:

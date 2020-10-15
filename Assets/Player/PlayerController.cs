@@ -6,19 +6,20 @@ public class PlayerController : MonoBehaviour
 {
   // TODO: call to player for number of engines and set moveCount
   public float moveSpeed = 5f, moveCount = 1f;
-  public Transform movePoint { get; set; }
+  public Transform movePoint;
   
   public LayerMask whatStopsMovement;
 
   public PlayerController()
   {
-        movePoint = this.transform;
+       
   }
   
   void Start()
   {
-    // makes movePoint independant
-    movePoint.parent = null;
+        // makes movePoint independant
+        //movePoint = GameObject.Find("p_ship").transform;
+        movePoint.parent = null;
   }
   
   void Update()

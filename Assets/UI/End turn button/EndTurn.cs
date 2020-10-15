@@ -10,7 +10,7 @@ public class EndTurn : MonoBehaviour
 
     public Text Textfield;
     public GameObject shipRef;
-    public PlayerController playerConRef = new playerConRef();
+    public PlayerController playerConRef;
     public Vector3 orgPos;
 
 
@@ -27,7 +27,7 @@ public class EndTurn : MonoBehaviour
     public void resetShip()
     {
         shipRef.transform.position = orgPos;
-        playerConRef.movePoint = orgPos;
+        playerConRef.movePoint.position = orgPos;
     }
 
     //public void IncTurn()
@@ -38,7 +38,7 @@ public class EndTurn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        playerConRef = new PlayerController();
         shipRef = GameObject.Find("p_ship");
         
         orgPos = shipRef.transform.position;
