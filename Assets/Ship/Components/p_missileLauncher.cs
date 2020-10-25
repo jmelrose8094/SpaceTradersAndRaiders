@@ -18,7 +18,7 @@ public class p_missileLauncher : MonoBehaviour
         
     }
 
-    int getLevel()
+     public int getLevel()
     {
         return level;
     }

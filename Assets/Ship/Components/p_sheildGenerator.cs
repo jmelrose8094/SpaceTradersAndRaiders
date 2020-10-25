@@ -19,7 +19,7 @@ public class p_sheildGenerator : MonoBehaviour
         
     }
 
-    int getLevel()
+    public int getLevel()
     {
         return level;
     }
