@@ -7,20 +7,20 @@ public class p_sheildGenerator : MonoBehaviour
 {
 
     public int level;
-    // Start is called before the first frame update
-    void Start()
+   
+    public p_sheildGenerator()
     {
-        
+        level = 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    public p_sheildGenerator(int l)
     {
-        
+        level = l;
     }
 
     public int getLevel()
     {
         return level;
     }
+
 }

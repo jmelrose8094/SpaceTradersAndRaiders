@@ -6,16 +6,15 @@ public class p_missileLauncher : MonoBehaviour
 {
 
     public int level;
-    // Start is called before the first frame update
-    void Start()
+  
+    public p_missileLauncher()
     {
-        
+        level = 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    public p_missileLauncher(int l)
     {
-        
+        level = l;
     }
 
      public int getLevel()

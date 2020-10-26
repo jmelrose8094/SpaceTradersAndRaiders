@@ -54,8 +54,9 @@ public class p_ship : MonoBehaviour
 
     public void Attack(p_ship target)
     {
-        int beamHit = 0;
-        int missileHit = 0;
+        int beamHit = 0; // number of beam weapons that need to be calculated against shields
+        int missileHit = 0; //number of missiles that need top be calculated against anitmissiles
+        int dmgHits = 0; //number of hits that actually make it through sheilds and anti missile
 
         for(int i = 0; i < arrBeamWeapons.Length; i++)
         {
@@ -75,14 +76,40 @@ public class p_ship : MonoBehaviour
 
         if(target.HasShields() == true)
         {
-
-
+            for(int i = 0; i < beamHit; i++)
+            {
+                if(target.ShieldDeflect(0) == true)
+                {
+                    dmgHits++;
+                }
+            }
         }
+        else
+        {
+            dmgHits = beamHit;
+        }
+
+        for (int i = 0; i < antiMissile.Length; i++)
+        {
+            if (target.MissileDeflect(i) == true)
+            {
+                dmgHits++;
+            }
+        }
+
+        if(missileHit > antiMissile.Length)
+        {
+            dmgHits = dmgHits + (antiMissile.Length - missileHit);
+        }
+
+
 
 
 
     }
 
+
+    //determines the amount of beam weapons that have a chance of hitting the enemy ship
     private bool FireBeam(int wep)
     {
         if(arrBeamWeapons[wep].getLevel() >= UnityEngine.Random.Range(1f, 6f))
@@ -97,6 +124,7 @@ public class p_ship : MonoBehaviour
 
     }
 
+    //determines the amount of missiles that have a chance of hitting the enemy ship
     private bool FireMissile(int wep)
     {
         if (launchers[wep].getLevel() >= UnityEngine.Random.Range(1f, 6f))
@@ -111,6 +139,7 @@ public class p_ship : MonoBehaviour
 
     }
 
+    //determines the amount of beam waepons that actually hit the ship
     private bool ShieldDeflect(int s)
     {
         if (generators[s].getLevel() >= UnityEngine.Random.Range(1f, 6f))
@@ -123,6 +152,18 @@ public class p_ship : MonoBehaviour
         }
     }
 
+    //determines the amount of missiles that actually hit the ship
+    private bool MissileDeflect(int am)
+    {
+        if (antiMissile[am].getLevel() >= UnityEngine.Random.Range(1f, 6f))
+        {
+            return (true);
+        }
+        else
+        {
+            return (false);
+        }
+    }
 
 
     public bool HasShields()
