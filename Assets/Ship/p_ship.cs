@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class p_ship : MonoBehaviour
@@ -38,10 +39,11 @@ public class p_ship : MonoBehaviour
         numEngines = 1;
         maxComponents = 5;
         slotsUsed = 0;
+        numArmor = 4;
 
     }
 
-    public p_ship(int bw, int g, int m, int am, int e, int mc)
+    public p_ship(int bw, int g, int m, int am, int e, int mc, int a)
     {
         numBeamWeapons = bw;
         numGenerators = g;
@@ -50,6 +52,7 @@ public class p_ship : MonoBehaviour
         numEngines = g;
         maxComponents = mc;
         slotsUsed = bw + g + m + am + e;
+        numArmor = a;
     }
 
     public void Attack(p_ship target)
@@ -58,9 +61,9 @@ public class p_ship : MonoBehaviour
         int missileHit = 0; //number of missiles that need top be calculated against anitmissiles
         int dmgHits = 0; //number of hits that actually make it through sheilds and anti missile
 
-        for(int i = 0; i < arrBeamWeapons.Length; i++)
+        for (int i = 0; i < arrBeamWeapons.Length; i++)
         {
-            if(FireBeam(i) == true)
+            if (FireBeam(i) == true)
             {
                 beamHit++;
             }
@@ -74,11 +77,11 @@ public class p_ship : MonoBehaviour
             }
         }
 
-        if(target.HasShields() == true)
+        if (target.HasShields() == true)
         {
-            for(int i = 0; i < beamHit; i++)
+            for (int i = 0; i < beamHit; i++)
             {
-                if(target.ShieldDeflect(0) == true)
+                if (target.ShieldDeflect(0) == true)
                 {
                     dmgHits++;
                 }
@@ -97,9 +100,26 @@ public class p_ship : MonoBehaviour
             }
         }
 
-        if(missileHit > antiMissile.Length)
+        if (missileHit > antiMissile.Length)
         {
             dmgHits = dmgHits + (antiMissile.Length - missileHit);
+        }
+
+        if (dmgHits > numArmor)
+        {
+            dmgHits = dmgHits - numArmor;
+            if(dmgHits >= numCriticalHits)
+            {
+                print("Ship Destroyed");
+            }
+            else
+            {
+                numCriticalHits = numCriticalHits - dmgHits;
+            }
+        }
+        else
+        {
+            numArmor = numArmor - dmgHits;
         }
 
 
