@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class EndTurn : MonoBehaviour
 {
 
-    public Text Textfield;
+    public Text Textfield, turnText;
     public GameObject shipRef;
     public PlayerController playerConRef;
     public Vector3 orgPos;
 
+    public int turnNum = 1;
     public int phaseNum = 1;
 
     //Mining Related Variables
@@ -24,12 +25,45 @@ public class EndTurn : MonoBehaviour
     public int commonMinerals, rareMinerals, vRareMinerals;
 
 
+    //Player Variables
+    public GameObject playerOne;
+    public GameObject playerTwo;
+    public int playerNum = 1;
+
+    public void switchPlayer()
+    {
+        switch (playerNum)
+        {
+            case 2:
+                playerOne.GetComponent<PlayerController>().enabled = true;
+                playerTwo.GetComponent<PlayerController>().enabled = false;
+                playerNum = 1;
+                turnText.text = "P" + playerNum + "'s Turn";
+                break;
+            case 1:
+                playerTwo.GetComponent<PlayerController>().enabled = true;
+                playerOne.GetComponent<PlayerController>().enabled = false;
+                playerNum = 2;
+                turnText.text = "P" + playerNum + "'s Turn";
+                break;
+        }
+    }
+
+
     //Basic function that sets the text of a text box
     public void SetText(string text)
     {
-        phaseNum += 1;
-        Textfield.text = "Phase " + phaseNum;
-
+        if ((playerNum == 2) && (phaseNum == 2))
+        {
+            turnNum += 1;
+            phaseNum = 1;
+            Textfield.text = "Turn " + turnNum + "\nFirst Phase";
+        }
+        else if ((playerNum == 2) && (phaseNum == 1))
+        {
+            phaseNum = 2;
+            Textfield.text = "Turn " + turnNum + "\nSecond Phase";
+        }
     }
 
     //Basic Function that resets the position of the ship to its starting position
@@ -47,6 +81,8 @@ public class EndTurn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerTwo.GetComponent<PlayerController>().enabled = false;
+
         playerConRef = new PlayerController();
         shipRef = GameObject.Find("p_ship");
         
@@ -70,7 +106,7 @@ public class EndTurn : MonoBehaviour
     }
 
     //On end of turn, adds the appropriate amount of minerals
-    public void clicked()
+    public void addMineral()
     {
         commonMinerals += (greenSystems * 30);
         rareMinerals += (greenSystems * 20) + (blueSystems * 20);
