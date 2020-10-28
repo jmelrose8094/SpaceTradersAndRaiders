@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
   // TODO: call to player for number of engines and set moveCount
   public float moveSpeed = 5f, moveCount = 1f;
-  public Transform movePoint, orgPoint;
+  public Transform movePoint/*, orgPoint*/;
+  public bool isSelected = false;
   
   public LayerMask whatStopsMovement;
 
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
         // makes movePoint independant
         //movePoint = GameObject.Find("p_ship").transform;
         movePoint.parent = null;
-        orgPoint.position = movePoint.position;
+        //orgPoint.position = movePoint.position;
   }
   
   
@@ -46,8 +47,8 @@ public class PlayerController : MonoBehaviour
     }
   }
   
-  public void resetShipPosition()
+  /*public void resetShipPosition()
   {
     movePoint.position = orgPoint.position;
-  }
+  }//*/
 }

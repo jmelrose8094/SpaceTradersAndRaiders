@@ -59,14 +59,14 @@ public class EndTurn : MonoBehaviour
     {
         print(orgPos.x);
         print(shipRef.transform.position.x);
-
+        /*
         //Gets the number of systems owned
         greenSysText = greenSys.GetComponent<Text>();
         greenSystems = int.Parse(greenSysText.text);
         redSysText = redSys.GetComponent<Text>();
         redSystems = int.Parse(redSysText.text);
         blueSysText = blueSys.GetComponent<Text>();
-        blueSystems = int.Parse(blueSysText.text);
+        blueSystems = int.Parse(blueSysText.text);//*/
     }
 
     //On end of turn, adds the appropriate amount of minerals
