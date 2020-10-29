@@ -6,12 +6,40 @@ using UnityEngine.UI;
 public class AddSystem : MonoBehaviour
 {
     public UnityEngine.UI.Text sysNum;
-    public int sys = 0;
-    public int sysPerClick = 1;
-    
+    public int playerOneSys = 0, playerTwoSys = 0, pTurn = 1;
+    public GameObject turnOrder;
+
+    private void Awake()
+    {
+        turnOrder = GameObject.FindGameObjectWithTag("End Turn");
+    }
+
+   
     public void clicked()
     {
-        sys += sysPerClick;
-        sysNum.text = " " + sys;
+        if (pTurn == 1)
+        {
+            playerOneSys += 1;
+        }
+
+        else if (pTurn == 2)
+        {
+            playerTwoSys += 1;
+        }
+    }
+
+    public void Update()
+    {
+        pTurn = turnOrder.GetComponent<EndTurn>().playerNum;
+
+        if (pTurn == 1)
+        {
+            sysNum.text = " " + playerOneSys;
+        }
+
+        if (pTurn == 2)
+        {
+            sysNum.text = " " + playerTwoSys;
+        }
     }
 }

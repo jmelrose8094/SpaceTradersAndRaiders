@@ -22,7 +22,7 @@ public class EndTurn : MonoBehaviour
 
     private Text greenSysText, redSysText, blueSysText;
     public int greenSystems, redSystems, blueSystems;
-    public int commonMinerals, rareMinerals, vRareMinerals;
+    public int commonMineralsOne, rareMineralsOne, vRareMineralsOne,commonMineralsTwo, rareMineralsTwo, vRareMineralsTwo;
 
 
     //Player Variables
@@ -103,14 +103,37 @@ public class EndTurn : MonoBehaviour
         redSystems = int.Parse(redSysText.text);
         blueSysText = blueSys.GetComponent<Text>();
         blueSystems = int.Parse(blueSysText.text);
+
+        /*switch (playerNum)
+        {
+            case 2:
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo;
+                break;
+            case 1:
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne;
+                break;
+        }
+        */
     }
 
     //On end of turn, adds the appropriate amount of minerals
     public void addMineral()
     {
-        commonMinerals += (greenSystems * 30);
-        rareMinerals += (greenSystems * 20) + (blueSystems * 20);
-        vRareMinerals += (greenSystems * 10) + (redSystems * 20);
-        addMinText.text = "Common Minerals: " + commonMinerals + "\nRare Minerals: " + rareMinerals + "\nVery Rare Minerals: " + vRareMinerals;
+        addMinText.text = "Test";
+        switch (playerNum)
+        {
+            case 2:
+                commonMineralsTwo += (greenSystems * 30);
+                rareMineralsTwo += (greenSystems * 20) + (blueSystems * 20);
+                vRareMineralsTwo += (greenSystems * 10) + (redSystems * 20);
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne;
+                break;
+            case 1:
+                commonMineralsOne += (greenSystems * 30);
+                rareMineralsOne += (greenSystems * 20) + (blueSystems * 20);
+                vRareMineralsOne += (greenSystems * 10) + (redSystems * 20);
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo;
+                break;
+        }
     }
 }
