@@ -204,6 +204,7 @@ public class p_ship : MonoBehaviour
     public void BuyNumBeam()
     {
         numBeamWeapons++;
+        //Debug.Log("Bought 1 Beam Weapon");
     }
     public int GetNumBeam()
     {
@@ -224,6 +225,10 @@ public class p_ship : MonoBehaviour
     {
         return numAntiMissile;
 
+    }
+    public void BuyEngine()
+    {
+        numEngines++;
     }
     public int GetNumEngine()
     {
