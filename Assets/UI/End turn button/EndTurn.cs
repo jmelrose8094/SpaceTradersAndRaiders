@@ -93,8 +93,6 @@ public class EndTurn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(orgPos.x);
-        print(shipRef.transform.position.x);
 
         //Gets the number of systems owned
         greenSysText = greenSys.GetComponent<Text>();

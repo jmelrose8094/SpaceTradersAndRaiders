@@ -63,6 +63,8 @@ public class p_ship : MonoBehaviour
         int missileHit = 0; //number of missiles that need top be calculated against anitmissiles
         int dmgHits = 0; //number of hits that actually make it through sheilds and anti missile
 
+        print("In attack");
+
         for (int i = 0; i < arrBeamWeapons.Length; i++)
         {
             if (FireBeam(i) == true)
@@ -113,6 +115,7 @@ public class p_ship : MonoBehaviour
             if(dmgHits >= numCriticalHits)
             {
                 print("Ship Destroyed");
+                Destroy(GameObject.FindGameObjectWithTag("ship 2"));
             }
             else
             {
