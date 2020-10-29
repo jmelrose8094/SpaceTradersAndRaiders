@@ -356,7 +356,7 @@ RectTransform:
   m_Children:
   - {fileID: 440004438}
   m_Father: {fileID: 643454162}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 326487613}
   - component: {fileID: 326487612}
   m_Layer: 5
-  m_Name: PhaseText
+  m_Name: Turn Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -813,7 +813,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Phase 1
+  m_Text: 'Turn 1
+
+    First Phase'
 --- !u!222 &326487613
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -838,8 +840,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 226}
-  m_SizeDelta: {x: 355.94666, y: 52.160645}
+  m_AnchoredPosition: {x: 3.4238, y: 224.6}
+  m_SizeDelta: {x: 349.09912, y: 117.26962}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &348919856
 GameObject:
@@ -873,7 +875,7 @@ RectTransform:
   m_Children:
   - {fileID: 1178046883}
   m_Father: {fileID: 643454162}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1436,7 +1438,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 643454162}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1456,8 +1458,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sysNum: {fileID: 584031502}
-  sys: 0
-  sysPerClick: 1
+  playerOneSys: 0
+  playerTwoSys: 0
+  pTurn: 1
+  turnOrder: {fileID: 0}
 --- !u!114 &584031502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1532,8 +1536,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sysNum: {fileID: 628825713}
-  sys: 0
-  sysPerClick: 1
+  playerOneSys: 0
+  playerTwoSys: 0
+  pTurn: 1
+  turnOrder: {fileID: 0}
 --- !u!114 &628825713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1588,7 +1594,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 643454162}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1643,12 +1649,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.95
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1670,7 +1676,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1686,6 +1692,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 326487614}
+  - {fileID: 1210764571}
   - {fileID: 1297796321}
   - {fileID: 348919857}
   - {fileID: 2058922976}
@@ -1718,7 +1725,7 @@ GameObject:
   - component: {fileID: 718837140}
   m_Layer: 5
   m_Name: End Turn
-  m_TagString: Untagged
+  m_TagString: End Turn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1736,11 +1743,11 @@ RectTransform:
   m_Children:
   - {fileID: 2013013102}
   m_Father: {fileID: 643454162}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 342, y: -187.9}
+  m_AnchoredPosition: {x: 379, y: -231}
   m_SizeDelta: {x: 204.35687, y: 76.731155}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &718837137
@@ -1788,7 +1795,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1297796325}
         m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
-        m_MethodName: clicked
+        m_MethodName: addMineral
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1808,6 +1815,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Phase 2
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 718837140}
+        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+        m_MethodName: switchPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &718837138
@@ -1861,20 +1880,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Textfield: {fileID: 326487612}
+  turnText: {fileID: 1210764569}
   shipRef: {fileID: 761909283}
   playerConRef: {fileID: 0}
   orgPos: {x: 0, y: 0, z: 0}
+  turnNum: 1
   phaseNum: 1
-  addMinText: {fileID: 0}
-  greenSys: {fileID: 348919856}
-  redSys: {fileID: 0}
-  blueSys: {fileID: 0}
+  addMinText: {fileID: 1297796322}
+  greenSys: {fileID: 2058922975}
+  redSys: {fileID: 628825711}
+  blueSys: {fileID: 584031499}
   greenSystems: 0
   redSystems: 0
   blueSystems: 0
-  commonMinerals: 0
-  rareMinerals: 0
-  vRareMinerals: 0
+  commonMineralsOne: 0
+  rareMineralsOne: 0
+  vRareMineralsOne: 0
+  commonMineralsTwo: 0
+  rareMineralsTwo: 0
+  vRareMineralsTwo: 0
+  playerOne: {fileID: 761909283}
+  playerTwo: {fileID: 1834418415}
+  playerNum: 1
 --- !u!1 &752731203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,6 +2807,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178046882}
   m_CullTransparentMesh: 0
+--- !u!1 &1210764568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1210764571}
+  - component: {fileID: 1210764570}
+  - component: {fileID: 1210764569}
+  m_Layer: 5
+  m_Name: PlayerTurnText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1210764569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210764568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.20103511, g: 0.15699537, b: 0.5283019, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 31
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 71
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: P1's Turn
+--- !u!222 &1210764570
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210764568}
+  m_CullTransparentMesh: 0
+--- !u!224 &1210764571
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210764568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 643454162}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 351.17, y: 224.6}
+  m_SizeDelta: {x: 349.09912, y: 117.26962}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1236041693
 GameObject:
   m_ObjectHideFlags: 0
@@ -2957,12 +3063,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 643454162}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -342, y: 188.9}
-  m_SizeDelta: {x: 341.74847, y: 126.36352}
+  m_AnchoredPosition: {x: -342, y: 220.1}
+  m_SizeDelta: {x: 341.74847, y: 126.363464}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1297796322
 MonoBehaviour:
@@ -3023,9 +3129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Textfield: {fileID: 0}
+  turnText: {fileID: 0}
   shipRef: {fileID: 0}
   playerConRef: {fileID: 0}
   orgPos: {x: 0, y: 0, z: 0}
+  turnNum: 1
   phaseNum: 1
   addMinText: {fileID: 1297796322}
   greenSys: {fileID: 2058922975}
@@ -3034,9 +3142,15 @@ MonoBehaviour:
   greenSystems: 0
   redSystems: 0
   blueSystems: 0
-  commonMinerals: 0
-  rareMinerals: 0
-  vRareMinerals: 0
+  commonMineralsOne: 0
+  rareMineralsOne: 0
+  vRareMineralsOne: 0
+  commonMineralsTwo: 0
+  rareMineralsTwo: 0
+  vRareMineralsTwo: 0
+  playerOne: {fileID: 0}
+  playerTwo: {fileID: 0}
+  playerNum: 1
 --- !u!1 &1350811481
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,7 +5261,7 @@ RectTransform:
   m_Children:
   - {fileID: 886077386}
   m_Father: {fileID: 643454162}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5274,7 +5388,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666539262}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
@@ -5293,7 +5407,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666539262}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
@@ -5731,7 +5845,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 643454162}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5751,8 +5865,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sysNum: {fileID: 2058922978}
-  sys: 0
-  sysPerClick: 1
+  playerOneSys: 0
+  playerTwoSys: 0
+  pTurn: 1
+  turnOrder: {fileID: 0}
 --- !u!114 &2058922978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5824,7 +5940,7 @@ RectTransform:
   m_Children:
   - {fileID: 311258022}
   m_Father: {fileID: 643454162}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
