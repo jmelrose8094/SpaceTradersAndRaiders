@@ -14,6 +14,17 @@ public class interactMenu : MonoBehaviour
     void Start()
     {
         Panels = GameObject.FindGameObjectsWithTag("PlanetUI");
+        /*foreach(GameObject pan in Panels)
+        {
+            pan.gameObject.SetActive(false);
+        }//*/
+    }
+    private void Awake()
+    {
+        foreach(GameObject pan in Panels)
+        {
+            pan.gameObject.SetActive(false);
+        }//*/
     }
 
     void OnMouseDown()
@@ -31,6 +42,16 @@ public class interactMenu : MonoBehaviour
         {
             PlanetUI.setActive(true);
         }*/
+        if (CraftPanel.gameObject.activeSelf == true)
+        {
+            if (Input.GetButtonDown("Escape"))
+            {
+                foreach(GameObject pan in Panels)
+                {
+                    pan.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 }
 //*/
