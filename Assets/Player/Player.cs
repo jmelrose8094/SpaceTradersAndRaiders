@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public string race;
+   /* public string race;
     public int power;
     public int wealth;
     public int achievement;
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
         race = r;
         trader = t;
     }
-
+    */
 
     // Start is called before the first frame update
     void Start()
