@@ -199,6 +199,10 @@ public class p_ship : MonoBehaviour
         
     }
 
+    public void BuyNumBeam()
+    {
+        numBeamWeapons++;
+    }
     public int GetNumBeam()
     {
         return numBeamWeapons;
