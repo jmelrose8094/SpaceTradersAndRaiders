@@ -14,7 +14,11 @@ public class p_ship : MonoBehaviour
     public p_beamWeapon[] arrBeamWeapons;
 
     public int numGenerators;
+<<<<<<< Updated upstream
     public p_sheildGenerator[] generators;
+=======
+    public p_sheildGenerators[] generators;
+>>>>>>> Stashed changes
 
     public int numMissiles;
     public p_missileLauncher[] launchers;
@@ -39,6 +43,7 @@ public class p_ship : MonoBehaviour
         numEngines = 1;
         maxComponents = 5;
         slotsUsed = 0;
+<<<<<<< Updated upstream
         numArmor = 4;
 
     }
@@ -229,3 +234,8 @@ public class p_ship : MonoBehaviour
 
     }
 }
+=======
+
+    }
+}
+>>>>>>> Stashed changes
