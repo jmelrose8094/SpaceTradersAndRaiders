@@ -175,17 +175,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9b4213c5f07d441b032ef164d017f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrComponents: []
   numBeamWeapons: 0
-  arrBeamWeapons: []
   numGenerators: 0
-  generators: []
   numMissiles: 0
-  launchers: []
   numAntiMissile: 0
-  antiMissile: []
   numCriticalHits: 0
   numArmor: 4
-  engines: []
   numEngines: 1
   maxComponents: 5
   slotsUsed: 0
@@ -2431,29 +2427,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9b4213c5f07d441b032ef164d017f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBeamWeapons: 4
-  arrBeamWeapons:
-  - {fileID: 761909297}
-  - {fileID: 761909296}
-  - {fileID: 761909295}
-  - {fileID: 761909294}
-  numGenerators: 1
-  generators:
-  - {fileID: 761909293}
-  numMissiles: 2
-  launchers:
-  - {fileID: 761909292}
-  - {fileID: 761909291}
-  numAntiMissile: 1
-  antiMissile:
-  - {fileID: 761909290}
-  numCriticalHits: 4
-  numArmor: 3
-  engines:
+  arrComponents:
   - {fileID: 761909289}
+  - {fileID: 761909294}
+  - {fileID: 761909293}
+  - {fileID: 761909292}
+  - {fileID: 761909290}
+  numBeamWeapons: 1
+  numGenerators: 1
+  numMissiles: 1
+  numAntiMissile: 1
+  numCriticalHits: 4
+  numArmor: 2
   numEngines: 1
-  maxComponents: 15
-  slotsUsed: 0
+  maxComponents: 5
+  slotsUsed: 5
 --- !u!4 &761909285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 504956542757383274, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
@@ -2537,7 +2525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4fc15b544df99478e49248b8344027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
 --- !u!114 &761909290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2550,7 +2537,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0addec6ac8831b64cb415e093f8b76da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
 --- !u!114 &761909291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2563,7 +2549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a59ac481a7a2fc4ba4ff71a0e23b20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
 --- !u!114 &761909292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2576,7 +2561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a59ac481a7a2fc4ba4ff71a0e23b20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 3
 --- !u!114 &761909293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2589,7 +2573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d3341bb855be4458574b5a4b29c615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
 --- !u!114 &761909294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2602,7 +2585,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cc6ae9a070eaa40a913ab0ba30a5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 3
 --- !u!114 &761909295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2615,7 +2597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cc6ae9a070eaa40a913ab0ba30a5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
 --- !u!114 &761909296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2628,7 +2609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cc6ae9a070eaa40a913ab0ba30a5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 3
 --- !u!114 &761909297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2641,7 +2621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cc6ae9a070eaa40a913ab0ba30a5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 4
 --- !u!1 &886077385
 GameObject:
   m_ObjectHideFlags: 0
@@ -6015,25 +5994,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9b4213c5f07d441b032ef164d017f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBeamWeapons: 1
-  arrBeamWeapons:
-  - {fileID: 1834418426}
-  numGenerators: 1
-  generators:
-  - {fileID: 1834418424}
-  numMissiles: 0
-  launchers:
-  - {fileID: 1834418425}
-  numAntiMissile: 0
-  antiMissile:
-  - {fileID: 1834418423}
-  numCriticalHits: 1
-  numArmor: 1
-  engines:
+  arrComponents:
   - {fileID: 1834418422}
+  - {fileID: 1834418423}
+  - {fileID: 1834418424}
+  - {fileID: 1834418425}
+  - {fileID: 1834418426}
+  numBeamWeapons: 1
+  numGenerators: 1
+  numMissiles: 1
+  numAntiMissile: 1
+  numCriticalHits: 1
+  numArmor: 3
   numEngines: 1
   maxComponents: 5
-  slotsUsed: 0
+  slotsUsed: 5
 --- !u!61 &1834418418
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6098,7 +6073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4fc15b544df99478e49248b8344027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
 --- !u!114 &1834418423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6111,7 +6085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0addec6ac8831b64cb415e093f8b76da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
 --- !u!114 &1834418424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6124,7 +6097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d3341bb855be4458574b5a4b29c615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
 --- !u!114 &1834418425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6137,7 +6109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a59ac481a7a2fc4ba4ff71a0e23b20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
 --- !u!114 &1834418426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6150,7 +6121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cc6ae9a070eaa40a913ab0ba30a5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
 --- !u!1 &2002129884
 GameObject:
   m_ObjectHideFlags: 0

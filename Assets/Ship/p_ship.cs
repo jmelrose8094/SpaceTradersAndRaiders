@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -10,24 +11,21 @@ using UnityEngine;
 public class p_ship : MonoBehaviour
 {
 
+    public Component[] arrComponents;
+
     public int numBeamWeapons;
-    public p_beamWeapon[] arrBeamWeapons;
+    
 
     public int numGenerators;
 
-    public p_sheildGenerator[] generators;
-
 
     public int numMissiles;
-    public p_missileLauncher[] launchers;
 
     public int numAntiMissile;
-    public p_antiMissile[] antiMissile;
 
     public int numCriticalHits = 0;
     public int numArmor;
 
-    public p_engine[] engines;
     public int numEngines;
     public int maxComponents;
     public int slotsUsed;
@@ -64,68 +62,92 @@ public class p_ship : MonoBehaviour
         int dmgHits = 0; //number of hits that actually make it through sheilds and anti missile
 
         print("In attack");
+        print(target.numArmor);
 
-        for (int i = 0; i < arrBeamWeapons.Length; i++)
+        //------------------------------------------ Beam
+
+        for (int i = 0; i < arrComponents.Length; i++)
         {
-            if (FireBeam(i) == true)
+            if (arrComponents[i] is p_beamWeapon && FireBeam(i) == true)
             {
                 beamHit++;
             }
         }
+        print(beamHit);
 
-        for (int i = 0; i < launchers.Length; i++)
+        //------------------------------------------- Missile
+
+        for (int i = 0; i < arrComponents.Length; i++)
         {
-            if (FireMissile(i) == true)
+            if (arrComponents[i] is p_missileLauncher && FireMissile(i) == true)
             {
                 missileHit++;
             }
         }
 
+        print(missileHit);
+
+        //------------------------------------------- Shields
+
         if (target.HasShields() == true)
         {
-            for (int i = 0; i < beamHit; i++)
-            {
-                if (target.ShieldDeflect(0) == true)
-                {
-                    dmgHits++;
-                }
-            }
+            dmgHits = ShieldDeflect(beamHit, target);
         }
         else
         {
             dmgHits = beamHit;
         }
 
-        for (int i = 0; i < antiMissile.Length; i++)
+        //------------------------------------------- Anti-Missile
+
+       if(target.HasAntiMissile() == true)
+       {
+            dmgHits = dmgHits + MissileDeflect(missileHit, target);
+       }
+        else
         {
-            if (target.MissileDeflect(i) == true)
-            {
-                dmgHits++;
-            }
+            dmgHits = dmgHits + missileHit;
         }
 
-        if (missileHit > antiMissile.Length)
-        {
-            dmgHits = dmgHits + (antiMissile.Length - missileHit);
-        }
+        print("dmg Hits " + dmgHits);
 
-        if (dmgHits > numArmor)
+        //--------------------------------------- Armor
+
+        if(dmgHits > target.numArmor)
         {
-            dmgHits = dmgHits - numArmor;
-            if(dmgHits >= numCriticalHits)
-            {
-                print("Ship Destroyed");
-                Destroy(GameObject.FindGameObjectWithTag("ship 2"));
-            }
-            else
-            {
-                numCriticalHits = numCriticalHits - dmgHits;
-            }
+            target.numArmor = 0;
+
+            target.numCriticalHits = target.numCriticalHits - (dmgHits - target.numArmor);
         }
         else
         {
-            numArmor = numArmor - dmgHits;
+            target.numArmor = target.numArmor - dmgHits;
         }
+
+        if(target.numCriticalHits <= 0)
+        {
+            Destroy(target);
+            Destroy(GameObject.FindGameObjectWithTag("ship 2"));
+            print("Target Destroyed");
+        }
+
+        //if (dmgHits > numArmor)
+        //{
+        //    dmgHits = dmgHits - target.numArmor;
+        //    if(dmgHits >= target.numCriticalHits)
+        //    {
+        //        print("Ship Destroyed");
+        //        Destroy(GameObject.FindGameObjectWithTag("ship 2"));
+        //    }
+        //    else
+        //    {
+        //        target.numCriticalHits = target.numCriticalHits - dmgHits;
+        //    }
+        //}
+        //else
+        //{
+        //    target.numArmor = target.numArmor - dmgHits;
+        //}
 
 
 
@@ -137,7 +159,7 @@ public class p_ship : MonoBehaviour
     //determines the amount of beam weapons that have a chance of hitting the enemy ship
     private bool FireBeam(int wep)
     {
-        if(arrBeamWeapons[wep].getLevel() >= UnityEngine.Random.Range(1f, 6f))
+        if(arrComponents[wep].getLevel() >= UnityEngine.Random.Range(1f, 6f))
         {
             return (true);
         }
@@ -152,7 +174,7 @@ public class p_ship : MonoBehaviour
     //determines the amount of missiles that have a chance of hitting the enemy ship
     private bool FireMissile(int wep)
     {
-        if (launchers[wep].getLevel() >= UnityEngine.Random.Range(1f, 6f))
+        if (arrComponents[wep].getLevel() >= UnityEngine.Random.Range(1f, 6f))
         {
             return (true);
         }
@@ -165,29 +187,63 @@ public class p_ship : MonoBehaviour
     }
 
     //determines the amount of beam waepons that actually hit the ship
-    private bool ShieldDeflect(int s)
+    private int ShieldDeflect(int hits, p_ship target)
     {
-        if (generators[s].getLevel() >= UnityEngine.Random.Range(1f, 6f))
+        int shieldGenLoc = 0;
+        int dmg = 0;
+        print("in shield" + hits);
+        for(int i = 0; i<target.maxComponents; i++)
         {
-            return (true);
+            if(target.arrComponents[i] is p_sheildGenerator)
+            {
+                shieldGenLoc = i;
+                break;
+            }
         }
-        else
+
+        for(int i=0; i<hits; i++)
         {
-            return (false);
+            if(target.arrComponents[shieldGenLoc].getLevel() <= UnityEngine.Random.Range(1f, 6f))
+            {
+                dmg++;
+            }
         }
+
+        return dmg;
     }
 
     //determines the amount of missiles that actually hit the ship
-    private bool MissileDeflect(int am)
+    private int MissileDeflect(int hits, p_ship target)
     {
-        if (antiMissile[am].getLevel() >= UnityEngine.Random.Range(1f, 6f))
+        int dmg = 0;
+        int[] AMLocations = new int[target.numAntiMissile];
+        print("in MD" + hits);
+
+        for (int i =0; i<target.maxComponents; i++)
         {
-            return (true);
+            int j = 0;
+            if(target.arrComponents[i] is p_antiMissile)
+            {
+                AMLocations[j] = i;
+                j++;
+            }
         }
-        else
+
+        for(int i = 0; i<target.numAntiMissile; i++)
         {
-            return (false);
+            if(target.arrComponents[AMLocations[i]].getLevel() >= UnityEngine.Random.Range(1f, 6f))
+            {
+                dmg++;
+            }
         }
+
+        if(hits > target.numAntiMissile)
+        {
+            dmg = dmg + (hits - target.numAntiMissile);
+        }
+
+        return (dmg);
+        
     }
 
 
@@ -204,11 +260,25 @@ public class p_ship : MonoBehaviour
         
     }
 
+    public bool HasAntiMissile()
+    {
+        if (this.GetNumAntiMissile() >= 1)
+        {
+            return (true);
+        }
+        else
+        {
+            return (false);
+        }
+
+    }
+
     public void BuyNumBeam()
     {
         numBeamWeapons++;
         //Debug.Log("Bought 1 Beam Weapon");
     }
+
     public int GetNumBeam()
     {
         return numBeamWeapons;
@@ -231,7 +301,18 @@ public class p_ship : MonoBehaviour
     }
     public void BuyEngine()
     {
-        numEngines++;
+
+        for(int i = 0; i<arrComponents.Length; i++)
+        {
+            if(arrComponents[i] == null)
+            {
+                numEngines++;
+                arrComponents[i] = new p_engine();
+                print("engine added");
+                break;
+                
+            }
+        }
     }
     public int GetNumEngine()
     {

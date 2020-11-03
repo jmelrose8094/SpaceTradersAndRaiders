@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class p_engine : MonoBehaviour
+public class p_engine : Component
 {
 
-    public int level;
+    //public int level;
     
     public p_engine()
     {
@@ -17,8 +17,10 @@ public class p_engine : MonoBehaviour
         level = l;
     }
 
-    public int getLevel()
-    {
-        return level;
-    }
+    //public int getLevel()
+    //{
+    //    return level;
+    //}
+
+
 }

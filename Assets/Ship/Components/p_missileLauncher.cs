@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class p_missileLauncher : MonoBehaviour
+public class p_missileLauncher : Component
 {
 
-    public int level;
+    //public int level;
   
     public p_missileLauncher()
     {
-        level = 1;
+        level = 4;
     }
 
     public p_missileLauncher(int l)
@@ -17,8 +17,10 @@ public class p_missileLauncher : MonoBehaviour
         level = l;
     }
 
-     public int getLevel()
-    {
-        return level;
-    }
+    //public int getLevel()
+    //{
+    //    return level;
+    //}
+
+
 }

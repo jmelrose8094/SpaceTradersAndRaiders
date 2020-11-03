@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class p_sheildGenerator : MonoBehaviour
+public class p_sheildGenerator : Component
 {
 
-    public int level;
+    //public int level;
    
     public p_sheildGenerator()
     {
@@ -18,9 +18,11 @@ public class p_sheildGenerator : MonoBehaviour
         level = l;
     }
 
-    public int getLevel()
-    {
-        return level;
-    }
+    //public int getLevel()
+    //{
+    //    return level;
+    //}
+
+    
 
 }

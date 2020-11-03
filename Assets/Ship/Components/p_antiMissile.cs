@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class p_antiMissile : MonoBehaviour
+public class p_antiMissile : Component
 {
 
-    public int level;
+    //public int level;
     
     public p_antiMissile()
     {
@@ -17,8 +17,10 @@ public class p_antiMissile : MonoBehaviour
         level = l;
     }
 
-    public int getLevel()
-    {
-        return level;
-    }
+    //public int getLevel()
+    //{
+    //    return level;
+    //}
+
+    
 }
