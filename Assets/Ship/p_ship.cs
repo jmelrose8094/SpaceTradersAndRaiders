@@ -6,29 +6,27 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class p_ship : MonoBehaviour
 {
-
     public Component[] arrComponents;
-
+    public ArrayList marines = new ArrayList();
     public int numBeamWeapons;
-    
-
     public int numGenerators;
-
-
     public int numMissiles;
-
     public int numAntiMissile;
-
     public int numCriticalHits = 0;
     public int numArmor;
-
     public int numEngines;
     public int maxComponents;
     public int slotsUsed;
+
+    public int numSpaceMarines;
+
+
+
 
     public p_ship()
     {
@@ -124,6 +122,8 @@ public class p_ship : MonoBehaviour
             target.numArmor = target.numArmor - dmgHits;
         }
 
+        // -------------------------------------- Critical Hits
+
         if(target.numCriticalHits <= 0)
         {
             Destroy(target);
@@ -131,29 +131,72 @@ public class p_ship : MonoBehaviour
             print("Target Destroyed");
         }
 
-        //if (dmgHits > numArmor)
-        //{
-        //    dmgHits = dmgHits - target.numArmor;
-        //    if(dmgHits >= target.numCriticalHits)
-        //    {
-        //        print("Ship Destroyed");
-        //        Destroy(GameObject.FindGameObjectWithTag("ship 2"));
-        //    }
-        //    else
-        //    {
-        //        target.numCriticalHits = target.numCriticalHits - dmgHits;
-        //    }
-        //}
-        //else
-        //{
-        //    target.numArmor = target.numArmor - dmgHits;
-        //}
+    }
+
+
+    //  -------------------------------------- Space Marine Combat
+
+    public void MarineAssault(p_ship target)
+    {
+        int numMarinesUsed, disadvantage = 0;
+        spaceMarine[] AssaultMarines;
+        numMarinesUsed = GetNumMarines();
+        AssaultMarines = GetSpaceMarines(numMarinesUsed);
+
+        disadvantage = HasMoreEngines(target);
+        
 
 
 
+        
 
 
     }
+
+
+    // ----------------------------------------- Returns how many more engines the target ship has over this ship
+    public int HasMoreEngines(p_ship target)
+    {
+        if(this.GetNumEngine() >= target.GetNumEngine())
+        {
+            return 0;
+        }
+        else 
+        {
+            return (target.GetNumEngine() - this.GetNumEngine()); 
+        }
+    }
+
+
+    //  ------------------------------------- Add Space Marine
+
+    public void addMarine(int l)
+    {
+        //spaceMarine a = new spaceMarine();
+
+        //marines.Add(a);
+    }
+
+    // ------------------------------------- Ask the player how many marines they want to use in the assault
+
+    public int GetNumMarines()
+    {
+        // To do: make a function to create a UI to ask the user how many marines that they want to use
+
+        int num = 3;
+        return num;
+    }
+
+
+    // -------------------------------------------- Get the array of space marines being used in attack and return them
+
+    public spaceMarine[] GetSpaceMarines(int num)
+    {
+        spaceMarine[] a = new spaceMarine[3];
+        return a;
+    }
+
+
 
 
     //determines the amount of beam weapons that have a chance of hitting the enemy ship
@@ -246,7 +289,7 @@ public class p_ship : MonoBehaviour
         
     }
 
-
+    // determines if this ship has any shields 
     public bool HasShields()
     {
         if(this.GetNumGenerator() >= 1)
@@ -260,6 +303,7 @@ public class p_ship : MonoBehaviour
         
     }
 
+    // determines if this ship has any anti missiles
     public bool HasAntiMissile()
     {
         if (this.GetNumAntiMissile() >= 1)
