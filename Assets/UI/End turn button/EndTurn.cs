@@ -23,6 +23,7 @@ public class EndTurn : MonoBehaviour
     public Text greenSysText, redSysText, blueSysText;
     public int greenSystems, redSystems, blueSystems;
     public int commonMineralsOne, rareMineralsOne, vRareMineralsOne, commonMineralsTwo, rareMineralsTwo, vRareMineralsTwo;
+    public int mineLevelOne = 1, mineLevelTwo = 1;
 
 
     //Player Variables
@@ -113,15 +114,41 @@ public class EndTurn : MonoBehaviour
                 commonMineralsTwo += (greenSystems * 30);
                 rareMineralsTwo += (greenSystems * 20) + (blueSystems * 20);
                 vRareMineralsTwo += (greenSystems * 10) + (redSystems * 20);
-                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne;
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
                 break;
 
             case 1:
                 commonMineralsOne += (greenSystems * 30);
                 rareMineralsOne += (greenSystems * 20) + (blueSystems * 20);
                 vRareMineralsOne += (greenSystems * 10) + (redSystems * 20);
-                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo;
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
                 break;
         }
     }
+
+    public void UpgradeMiner()
+    {
+        if (playerNum == 2)
+        {
+            if (commonMineralsOne >= 150 && rareMineralsOne >= 20 && vRareMineralsOne >= 10)
+            {
+                mineLevelOne += 1;
+                commonMineralsOne -= 150;
+                rareMineralsOne -= 20;
+                vRareMineralsOne -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
+            }
+        }
+        else if (playerNum == 1)
+        {
+            if (commonMineralsTwo >= 150 && rareMineralsTwo >= 20 && vRareMineralsTwo >= 10)
+            {
+                mineLevelTwo += 1;
+                commonMineralsTwo -= 150;
+                rareMineralsTwo -= 20;
+                vRareMineralsTwo -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
+            }
+        }
+    }       
 }

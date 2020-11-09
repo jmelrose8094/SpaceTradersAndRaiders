@@ -10,7 +10,7 @@ public class AddMinerals : MonoBehaviour
 
     private Text greenSysText, redSysText, blueSysText;
     public int greenSystems, redSystems, blueSystems;
-    public int commonMinerals, rareMinerals, vRareMinerals;
+    public static int commonMinerals, rareMinerals, vRareMinerals;
 
     public void Update()
     {
