@@ -21,6 +21,11 @@ public class Component : MonoBehaviour
         return level;
     }
 
+    public void setLevel(int l)
+    {
+        level = l;
+    }
+
     
    
 }

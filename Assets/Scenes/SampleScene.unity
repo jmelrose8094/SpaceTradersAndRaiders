@@ -2684,12 +2684,7 @@ MonoBehaviour:
   - {fileID: 761909298}
   - {fileID: 761909298}
   - {fileID: 761909298}
-  enemyMarines:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  enemyMarines: []
   numBeamWeapons: 1
   numGenerators: 1
   numMissiles: 1
@@ -2893,7 +2888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789a14af58772dc49a1eeeb8e5bd0e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 4
+  level: 3
   active: 1
 --- !u!1 &886077385
 GameObject:
@@ -6515,7 +6510,12 @@ MonoBehaviour:
   - {fileID: 1834418424}
   - {fileID: 1834418425}
   - {fileID: 1834418426}
-  marines: []
+  marines:
+  - {fileID: 1834418420}
+  - {fileID: 1834418420}
+  - {fileID: 1834418420}
+  - {fileID: 1834418420}
+  - {fileID: 1834418420}
   enemyMarines: []
   numBeamWeapons: 1
   numGenerators: 1
@@ -6576,6 +6576,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &1834418420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834418415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789a14af58772dc49a1eeeb8e5bd0e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  active: 1
 --- !u!4 &1834418421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 504956542757383274, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}

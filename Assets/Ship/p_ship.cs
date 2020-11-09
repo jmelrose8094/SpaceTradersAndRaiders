@@ -30,7 +30,12 @@ public class p_ship : MonoBehaviour
 
 
 
-
+    void Start()
+    {
+        numSpaceMarines = marines.Count;
+        numActiveMarines = numSpaceMarines;
+        numEnemyMarines = 0;
+    }
     public p_ship()
     {
         numBeamWeapons = 0;
@@ -141,7 +146,7 @@ public class p_ship : MonoBehaviour
 
     public void MarineAssault(p_ship target)
     {
-        int numMarinesUsed, disadvantage = 0, nullCounter = 0;
+        int numMarinesUsed, disadvantage = 0;
         bool boardSuccessful = false;
         numMarinesUsed = GetNumAssaultMarines();
         disadvantage = HasMoreEngines(target);
@@ -149,50 +154,43 @@ public class p_ship : MonoBehaviour
 
         //Boarding process
         int i = 0;
-        while(i<numMarinesUsed)
+        while(i<numMarinesUsed && marines.Count>=1)
         {
-            print("boarding process while loop");
-            print("Index before if: " +i);
-            print("NumMarinesUsed: " + numMarinesUsed);
-            if(marines[i + nullCounter] != null && marines[i+nullCounter].GetActivity() == true)
+            if(marines[i] != null && marines[(i)].GetActivity() == true)
             {
-                print("in first if");
-                if(MarineRoll(disadvantage, i+nullCounter))
+                if(MarineRoll(disadvantage, (i)))
                 {
-                    print("In if Marine roll. Size of enemy list" + target.GetEnemyMarineSize());
-                    print("Index: " + i);
-                    TransferMarine(marines[i+nullCounter], i+nullCounter, target);
+
+                    TransferMarine(marines[(i)], (i), target);
 
                 }
-                else if(!MarineRoll(disadvantage, i+nullCounter))
+                else if(!MarineRoll(disadvantage, (i)))
                 {
-                    print("In else if");
                     if(target.HasShields())
                     {
-                        print("Marine destroyed");
-                        marines.RemoveAt(i+nullCounter);
+                        marines.RemoveAt(i);
                         numSpaceMarines--;
                         numActiveMarines--;
                     }
                     else
                     {
-                        marines[i+nullCounter].ToggleActive();
+                        marines[(i)].ToggleActive();
                         numActiveMarines--;
+                        i++;
                     }
                 }
-                i++;
             }
             else
             {
-                nullCounter++;
-                print("Null counter ++");
+                print("Null found");
             }
             
         }
         print("post board");
         if(target.GetNumSpaceMarines() > 0)
         {
-
+            print("target has greater than 0 space marines");
+            print(target.GetNumEnemy());
             
             // Each player rolls until one side no longer has any space marines
             do
@@ -203,48 +201,20 @@ public class p_ship : MonoBehaviour
 
                 if (friendlyRoll > enemyRoll)
                 {
-                    for (int j = 0; j < target.GetMarinesSize(); j++)
-                    {
-                        if (target.marines[j] != null)
-                        {
-                            target.marines.RemoveAt(j);
-                            target.DecMarine();
-                            break;
-                        }
-                    }
+                    target.marines.RemoveAt(0);
+                    target.DecMarine();
                 }
                 else if (friendlyRoll < enemyRoll)
                 {
-                    for (int j = 0; j < target.GetEnemyMarineSize(); j++)
-                    {
-                        if (target.enemyMarines[j] != null)
-                        {
-                            target.enemyMarines.RemoveAt(j);
-                            target.DecEnemyMarine();
-                            break;
-                        }
-                    }
+                    target.enemyMarines.RemoveAt(0);
+                    target.DecEnemyMarine();
                 }
                 else
                 {
-                    for (int j = 0; j < target.GetMarinesSize(); j++)
-                    {
-                        if (target.marines[j] != null)
-                        {
-                            target.marines.RemoveAt(j);
-                            target.DecMarine();
-                            break;
-                        }
-                    }
-                    for (int j = 0; j < target.GetEnemyMarineSize(); j++)
-                    {
-                        if (target.enemyMarines[j] != null)
-                        {
-                            target.enemyMarines.RemoveAt(j);
-                            target.DecEnemyMarine();
-                            break;
-                        }
-                    }
+                    target.enemyMarines.RemoveAt(0);
+                    target.marines.RemoveAt(0);
+                    target.DecEnemyMarine();
+                    target.DecMarine();
                 }
             }
             while (target.GetNumSpaceMarines() > 0 && target.GetNumEnemy() > 0);
@@ -257,6 +227,9 @@ public class p_ship : MonoBehaviour
         }
         else
         {
+            print("board successful");
+            print(target.marines.Count);
+            print(target.GetNumSpaceMarines());
             boardSuccessful = true;
         }
         
@@ -267,6 +240,8 @@ public class p_ship : MonoBehaviour
         else
         {
             print("Failed Attempt");
+            print(target.GetNumSpaceMarines());
+            print(target.GetNumEnemy());
         }
 
     }

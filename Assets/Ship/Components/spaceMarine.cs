@@ -38,5 +38,9 @@ public class spaceMarine : MonoBehaviour
         return active;
     }
 
+    public string toString()
+    {
+        return ("Marine level: " + level);
+    }
 
 }
