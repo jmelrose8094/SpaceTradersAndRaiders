@@ -5,14 +5,15 @@ using UnityEngine;
 public class spaceMarine : MonoBehaviour
 {
     public int level;
+    public bool active = true;
 
-    spaceMarine()
+    public spaceMarine()
     {
         level = 1;
 
     }
 
-    spaceMarine(int l)
+    public spaceMarine(int l)
     {
         level = l;
     }
@@ -25,6 +26,16 @@ public class spaceMarine : MonoBehaviour
     public void setLevel(int l)
     {
         level = l;
+    }
+
+    public void ToggleActive()
+    {
+        active = !active;
+    }
+
+    public bool GetActivity()
+    {
+        return active;
     }
 
 
