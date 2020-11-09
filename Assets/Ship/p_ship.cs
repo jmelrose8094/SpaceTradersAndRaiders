@@ -153,6 +153,7 @@ public class p_ship : MonoBehaviour
         {
             print("boarding process while loop");
             print("Index before if: " +i);
+            print("NumMarinesUsed: " + numMarinesUsed);
             if(marines[i + nullCounter] != null && marines[i+nullCounter].GetActivity() == true)
             {
                 print("in first if");
