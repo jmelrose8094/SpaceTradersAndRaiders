@@ -12,7 +12,8 @@ using UnityEngine;
 public class p_ship : MonoBehaviour
 {
     public Component[] arrComponents;
-    public ArrayList marines = new ArrayList();
+    public List<spaceMarine> marines = new List<spaceMarine>();
+    public List<spaceMarine> enemyMarines = new List<spaceMarine>();
     public int numBeamWeapons;
     public int numGenerators;
     public int numMissiles;
@@ -24,6 +25,8 @@ public class p_ship : MonoBehaviour
     public int slotsUsed;
 
     public int numSpaceMarines;
+    public int numActiveMarines;
+    public int numEnemyMarines;
 
 
 
@@ -138,21 +141,148 @@ public class p_ship : MonoBehaviour
 
     public void MarineAssault(p_ship target)
     {
-        int numMarinesUsed, disadvantage = 0;
-        spaceMarine[] AssaultMarines;
-        numMarinesUsed = GetNumMarines();
-        AssaultMarines = GetSpaceMarines(numMarinesUsed);
-
+        int numMarinesUsed, disadvantage = 0, nullCounter = 0;
+        bool boardSuccessful = false;
+        numMarinesUsed = GetNumAssaultMarines();
         disadvantage = HasMoreEngines(target);
+
+
+        //Boarding process
+        int i = 0;
+        while(i<numMarinesUsed)
+        {
+            print("boarding process while loop");
+            print("Index before if: " +i);
+            if(marines[i + nullCounter] != null && marines[i+nullCounter].GetActivity() == true)
+            {
+                print("in first if");
+                if(MarineRoll(disadvantage, i+nullCounter))
+                {
+                    print("In if Marine roll. Size of enemy list" + target.GetEnemyMarineSize());
+                    print("Index: " + i);
+                    TransferMarine(marines[i+nullCounter], i+nullCounter, target);
+
+                }
+                else if(!MarineRoll(disadvantage, i+nullCounter))
+                {
+                    print("In else if");
+                    if(target.HasShields())
+                    {
+                        print("Marine destroyed");
+                        marines.RemoveAt(i+nullCounter);
+                        numSpaceMarines--;
+                        numActiveMarines--;
+                    }
+                    else
+                    {
+                        marines[i+nullCounter].ToggleActive();
+                        numActiveMarines--;
+                    }
+                }
+                i++;
+            }
+            else
+            {
+                nullCounter++;
+                print("Null counter ++");
+            }
+            
+        }
+        print("post board");
+        if(target.GetNumSpaceMarines() > 0)
+        {
+
+            
+            // Each player rolls until one side no longer has any space marines
+            do
+            {
+                float friendlyRoll = 0, enemyRoll = 0;
+                friendlyRoll = UnityEngine.Random.Range(1f, 6f);
+                enemyRoll = UnityEngine.Random.Range(1f, 6f);
+
+                if (friendlyRoll > enemyRoll)
+                {
+                    for (int j = 0; j < target.GetMarinesSize(); j++)
+                    {
+                        if (target.marines[j] != null)
+                        {
+                            target.marines.RemoveAt(j);
+                            target.DecMarine();
+                            break;
+                        }
+                    }
+                }
+                else if (friendlyRoll < enemyRoll)
+                {
+                    for (int j = 0; j < target.GetEnemyMarineSize(); j++)
+                    {
+                        if (target.enemyMarines[j] != null)
+                        {
+                            target.enemyMarines.RemoveAt(j);
+                            target.DecEnemyMarine();
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < target.GetMarinesSize(); j++)
+                    {
+                        if (target.marines[j] != null)
+                        {
+                            target.marines.RemoveAt(j);
+                            target.DecMarine();
+                            break;
+                        }
+                    }
+                    for (int j = 0; j < target.GetEnemyMarineSize(); j++)
+                    {
+                        if (target.enemyMarines[j] != null)
+                        {
+                            target.enemyMarines.RemoveAt(j);
+                            target.DecEnemyMarine();
+                            break;
+                        }
+                    }
+                }
+            }
+            while (target.GetNumSpaceMarines() > 0 && target.GetNumEnemy() > 0);
+
+            if((target.GetNumEnemy() > 0) == true && target.GetNumSpaceMarines() == 0)
+            {
+                boardSuccessful = true;
+            }
+            
+        }
+        else
+        {
+            boardSuccessful = true;
+        }
         
-
-
-
-        
-
+        if(boardSuccessful == true)
+        {
+            print("Ship Captured");
+        }
+        else
+        {
+            print("Failed Attempt");
+        }
 
     }
 
+    // ---------------------------------------- Rolls dice for marine
+
+    public bool MarineRoll(int dis, int i)
+    {
+        if (marines[i].getLevel() >= UnityEngine.Random.Range(1f, 6f) + dis)
+        {
+            return (true);
+        }
+        else
+        {
+            return (false);
+        }
+    }
 
     // ----------------------------------------- Returns how many more engines the target ship has over this ship
     public int HasMoreEngines(p_ship target)
@@ -168,18 +298,11 @@ public class p_ship : MonoBehaviour
     }
 
 
-    //  ------------------------------------- Add Space Marine
-
-    public void addMarine(int l)
-    {
-        //spaceMarine a = new spaceMarine();
-
-        //marines.Add(a);
-    }
+    
 
     // ------------------------------------- Ask the player how many marines they want to use in the assault
 
-    public int GetNumMarines()
+    public int GetNumAssaultMarines()
     {
         // To do: make a function to create a UI to ask the user how many marines that they want to use
 
@@ -192,11 +315,40 @@ public class p_ship : MonoBehaviour
 
     public spaceMarine[] GetSpaceMarines(int num)
     {
-        spaceMarine[] a = new spaceMarine[3];
+        spaceMarine[] a = new spaceMarine[num];
+
+        for(int i = 0; i < num; i++)
+        {
+            if(marines[i] != null)
+            {
+                a[i] = marines[i];
+            }
+        }
+
         return a;
     }
 
+    // -------------------------------------------- Transfers space marine from this ship to target ship
 
+    public void TransferMarine(spaceMarine m, int i, p_ship target)
+    {
+        print("In Transfer Marine");
+        target.AddEnemyMarine(m);
+        target.IncEnemyMarine();
+
+        marines.RemoveAt(i);
+
+        numSpaceMarines--;
+
+
+    }
+
+    // --------------------------------------------- Adds marine to enemy ship
+
+    public void AddEnemyMarine(spaceMarine m)
+    {
+        enemyMarines.Add(m);
+    }
 
 
     //determines the amount of beam weapons that have a chance of hitting the enemy ship
@@ -317,10 +469,62 @@ public class p_ship : MonoBehaviour
 
     }
 
+    //  ------------------------------------- Add Space Marine
+
+    public void addMarine(int l)
+    {
+        spaceMarine a = new spaceMarine(l);
+
+        marines.Add(a);
+        numActiveMarines++;
+        numSpaceMarines++;
+    }
+
+    public void IncEnemyMarine()
+    {
+        numEnemyMarines++;
+    }
+
+    public void DecMarine()
+    {
+        numSpaceMarines--;
+        numActiveMarines--;
+    }
+
+    public void DecEnemyMarine()
+    {
+        numEnemyMarines--;
+    }
+
     public void BuyNumBeam()
     {
         numBeamWeapons++;
         //Debug.Log("Bought 1 Beam Weapon");
+    }
+
+    public int GetMarinesSize()
+    {
+        return marines.Count;
+    }
+
+    public int GetEnemyMarineSize()
+    {
+        return enemyMarines.Count;
+    }
+
+    public int GetNumSpaceMarines()
+    {
+        return numSpaceMarines;
+    }
+
+    public int GetNumActiveMarines()
+    {
+        return numActiveMarines;
+    }
+
+    public int GetNumEnemy()
+    {
+        return numEnemyMarines;
     }
 
     public int GetNumBeam()
