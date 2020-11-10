@@ -18,11 +18,11 @@ public class p_sheildGenerator : Component
         level = l;
     }
 
-    //public int getLevel()
-    //{
-    //    return level;
-    //}
+    public override string toString()
+    {
+        return ("Shield Gen Level: " + level);
+    }
 
-    
+
 
 }

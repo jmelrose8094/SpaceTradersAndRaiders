@@ -17,10 +17,10 @@ public class p_engine : Component
         level = l;
     }
 
-    //public int getLevel()
-    //{
-    //    return level;
-    //}
+    public override string toString()
+    {
+        return ("Engine Level: " + level);
+    }
 
 
 }

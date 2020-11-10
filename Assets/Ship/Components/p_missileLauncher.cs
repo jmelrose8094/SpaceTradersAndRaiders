@@ -17,10 +17,10 @@ public class p_missileLauncher : Component
         level = l;
     }
 
-    //public int getLevel()
-    //{
-    //    return level;
-    //}
+    public override string toString()
+    {
+        return ("Missile Launcher Level: " + level);
+    }
 
 
 }

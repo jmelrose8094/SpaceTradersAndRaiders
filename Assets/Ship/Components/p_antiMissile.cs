@@ -17,10 +17,9 @@ public class p_antiMissile : Component
         level = l;
     }
 
-    //public int getLevel()
-    //{
-    //    return level;
-    //}
+    public override string toString()
+    {
+        return ("Anti-Missile Level: " + level);
+    }
 
-    
 }

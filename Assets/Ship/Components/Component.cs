@@ -6,6 +6,7 @@ using UnityEngine;
 public class Component : MonoBehaviour
 {
     protected int level;
+    protected bool active = true;
 
     public Component()
     {
@@ -26,6 +27,18 @@ public class Component : MonoBehaviour
         level = l;
     }
 
+    public void ToggleActivity()
+    {
+        active = !active;
+    }
     
-   
+    public bool getActivity()
+    {
+        return active;
+    }
+
+    public virtual string toString()
+    {
+        return ("Component");
+    }
 }

@@ -16,11 +16,9 @@ public class p_beamWeapon  : Component
     {
         level = l;
     }
-
-    //public int getLevel()
-    //{
-    //    return level;
-    //}
-
+    public override string toString()
+    {
+        return ("Beam Weapon Level: " + level);
+    }
 
 }

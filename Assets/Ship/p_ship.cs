@@ -11,7 +11,8 @@ using UnityEngine;
 
 public class p_ship : MonoBehaviour
 {
-    public Component[] arrComponents;
+    public int owner = 1;
+    public List<Component> arrComponents = new List<Component>();
     public List<spaceMarine> marines = new List<spaceMarine>();
     public List<spaceMarine> enemyMarines = new List<spaceMarine>();
     public int numBeamWeapons;
@@ -21,6 +22,8 @@ public class p_ship : MonoBehaviour
     public int numCriticalHits = 0;
     public int numArmor;
     public int numEngines;
+    public int numRepairSys;
+    public int numCommandSys;
     public int maxComponents;
     public int slotsUsed;
 
@@ -28,7 +31,7 @@ public class p_ship : MonoBehaviour
     public int numActiveMarines;
     public int numEnemyMarines;
 
-
+    // To Do: add in determine tactical initiative
 
     void Start()
     {
@@ -61,6 +64,9 @@ public class p_ship : MonoBehaviour
         numArmor = a;
     }
 
+
+    // --------------------------------------------------- This ship attacks ship at the target parameter
+
     public void Attack(p_ship target)
     {
         int beamHit = 0; // number of beam weapons that need to be calculated against shields
@@ -72,9 +78,9 @@ public class p_ship : MonoBehaviour
 
         //------------------------------------------ Beam
 
-        for (int i = 0; i < arrComponents.Length; i++)
+        for (int i = 0; i < arrComponents.Count; i++)
         {
-            if (arrComponents[i] is p_beamWeapon && FireBeam(i) == true)
+            if (arrComponents[i] is p_beamWeapon && FireBeam(i) == true && arrComponents[i].getActivity() == true)
             {
                 beamHit++;
             }
@@ -83,9 +89,9 @@ public class p_ship : MonoBehaviour
 
         //------------------------------------------- Missile
 
-        for (int i = 0; i < arrComponents.Length; i++)
+        for (int i = 0; i < arrComponents.Count; i++)
         {
-            if (arrComponents[i] is p_missileLauncher && FireMissile(i) == true)
+            if (arrComponents[i] is p_missileLauncher && FireMissile(i) == true && arrComponents[i].getActivity() == true)
             {
                 missileHit++;
             }
@@ -123,11 +129,37 @@ public class p_ship : MonoBehaviour
         {
             target.numArmor = 0;
 
-            target.numCriticalHits = target.numCriticalHits - (dmgHits - target.numArmor);
+            do
+            {
+                int marker = UnityEngine.Random.Range(0, maxComponents);
+
+                if (marker >= target.arrComponents.Count)
+                {
+                    print("Critical Hit!");
+                    target.numCriticalHits--;
+                    dmgHits--;
+                }
+                else if(target.arrComponents[marker].getActivity() == true)
+                {
+                    target.arrComponents[marker].ToggleActivity();
+                    dmgHits--;
+                    print("Component: " + target.arrComponents[marker].ToString() + " inactive");
+                }
+                else
+                {
+                    target.arrComponents.RemoveAt(marker);
+                    dmgHits--;
+                    print("Component: " + target.arrComponents[marker].ToString() + " Destroyed");
+                }
+            }
+            while (dmgHits != 0 && target.numCriticalHits != 0);
+
         }
         else
         {
+            print("Armor Before: " + target.numArmor);
             target.numArmor = target.numArmor - dmgHits;
+            print("Armor After: " + target.numArmor);
         }
 
         // -------------------------------------- Critical Hits
@@ -246,6 +278,32 @@ public class p_ship : MonoBehaviour
 
     }
 
+    // -------------------------------------------- Utilizes all available repair systems
+
+    public void Repair()
+    {
+        int numUsed = 0;
+        while(numUsed <= numRepairSys)
+        {
+            RepairComponent();
+            numUsed++;
+        }
+    }
+
+    // ------------------------------------------- Repairs a single component
+
+    public void RepairComponent()
+    {
+        for(int i = 0; i<arrComponents.Count; i++)
+        {
+            if(arrComponents[i].getActivity() == false)
+            {
+                arrComponents[i].ToggleActivity();
+                break;
+            }
+        }
+    }
+
     // ---------------------------------------- Rolls dice for marine
 
     public bool MarineRoll(int dis, int i)
@@ -362,10 +420,9 @@ public class p_ship : MonoBehaviour
     {
         int shieldGenLoc = 0;
         int dmg = 0;
-        print("in shield" + hits);
-        for(int i = 0; i<target.maxComponents; i++)
+        for(int i = 0; i<target.arrComponents.Count; i++)
         {
-            if(target.arrComponents[i] is p_sheildGenerator)
+            if(target.arrComponents[i] is p_sheildGenerator && arrComponents[i].getActivity() == true)
             {
                 shieldGenLoc = i;
                 break;
@@ -388,12 +445,11 @@ public class p_ship : MonoBehaviour
     {
         int dmg = 0;
         int[] AMLocations = new int[target.numAntiMissile];
-        print("in MD" + hits);
 
-        for (int i =0; i<target.maxComponents; i++)
+        for (int i =0; i<target.arrComponents.Count; i++)
         {
             int j = 0;
-            if(target.arrComponents[i] is p_antiMissile)
+            if(target.arrComponents[i] is p_antiMissile && arrComponents[i].getActivity() == true)
             {
                 AMLocations[j] = i;
                 j++;
@@ -447,7 +503,7 @@ public class p_ship : MonoBehaviour
 
     //  ------------------------------------- Add Space Marine
 
-    public void addMarine(int l)
+    public void AddMarine(int l)
     {
         spaceMarine a = new spaceMarine(l);
 
@@ -460,24 +516,15 @@ public class p_ship : MonoBehaviour
     {
         numEnemyMarines++;
     }
-
     public void DecMarine()
     {
         numSpaceMarines--;
         numActiveMarines--;
     }
-
     public void DecEnemyMarine()
     {
         numEnemyMarines--;
     }
-
-    public void BuyNumBeam()
-    {
-        numBeamWeapons++;
-        //Debug.Log("Bought 1 Beam Weapon");
-    }
-
     public int GetMarinesSize()
     {
         return marines.Count;
@@ -523,24 +570,77 @@ public class p_ship : MonoBehaviour
         return numAntiMissile;
 
     }
-    public void BuyEngine()
+    public int GetNumRepairSys()
     {
-
-        for(int i = 0; i<arrComponents.Length; i++)
-        {
-            if(arrComponents[i] == null)
-            {
-                numEngines++;
-                arrComponents[i] = new p_engine();
-                print("engine added");
-                break;
-                
-            }
-        }
+        return numRepairSys;
     }
+    public int GetNumCommand()
+    {
+        return numCommandSys;
+    }
+    
     public int GetNumEngine()
     {
         return numEngines;
+
+    }
+    
+    // ---------------------------------------- Buy Components
+
+    public void BuyEngine(int level)
+    {
+        p_engine e = new p_engine(level);
+        numEngines++;
+        arrComponents.Add(e);
+        print("engine added");
+                
+    }
+    public void BuyBeamWep(int level)
+    {
+        p_beamWeapon bw = new p_beamWeapon(level);
+        numBeamWeapons++;
+        arrComponents.Add(bw);
+        print("Beam Weapon Added");
+
+    }
+    public void BuyMissileLauncher(int level)
+    {
+        p_missileLauncher ml = new p_missileLauncher(level);
+        numMissiles++;
+        arrComponents.Add(ml);
+        print("Missile Launcher Added");
+
+    }
+    public void BuyAntiMissile(int level)
+    {
+        p_antiMissile am = new p_antiMissile(level);
+        numAntiMissile++;
+        arrComponents.Add(am);
+        print("Anti-Missile Added");
+
+    }
+    public void BuyShieldGen(int level)
+    {
+        p_sheildGenerator sg = new p_sheildGenerator(level);
+        numGenerators++;
+        arrComponents.Add(sg);
+        print("Shield Generator Added");
+
+    }
+    public void BuyCommandSys(int level)
+    {
+        p_commandSystem cs = new p_commandSystem(level);
+        numCommandSys++;
+        arrComponents.Add(cs);
+        print("Command System Added");
+
+    }
+    public void BuyRepairSys(int level)
+    {
+        p_repairSystem rs = new p_repairSystem(level);
+        numRepairSys++;
+        arrComponents.Add(rs);
+        print("Repair System Added");
 
     }
 }
