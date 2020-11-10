@@ -150,5 +150,163 @@ public class EndTurn : MonoBehaviour
                 addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
             }
         }
-    }       
+    }
+    
+    public void BuyEngine()
+    {
+        if (playerNum == 2)
+        {
+            if (commonMineralsOne >= 30 && rareMineralsOne >= 10)
+            {
+                commonMineralsOne -= 30;
+                rareMineralsOne -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
+            }
+        }
+        else if (playerNum == 1)
+        {
+            if (commonMineralsTwo >= 30 && rareMineralsTwo >= 10)
+            {
+                commonMineralsTwo -= 30;
+                rareMineralsTwo -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
+            }
+        }
+    }
+    public void BuyShieldGen()
+    {
+        if (playerNum == 2)
+        {
+            if (commonMineralsOne >= 10 && rareMineralsOne >= 20 && vRareMineralsOne >= 10)
+            {
+                commonMineralsOne -= 10;
+                rareMineralsOne -= 20;
+                vRareMineralsOne -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
+            }
+        }
+        else if (playerNum == 1)
+        {
+            if (commonMineralsTwo >= 10 && rareMineralsTwo >= 20 && vRareMineralsTwo >= 10)
+            {
+                commonMineralsTwo -= 10;
+                rareMineralsTwo -= 20;
+                vRareMineralsTwo -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
+            }
+        }
+    }
+    public void BuyRepairSys()
+    {
+        if (playerNum == 2)
+        {
+            if (commonMineralsOne >= 50 && rareMineralsOne >= 40 && vRareMineralsOne >= 30)
+            {
+                commonMineralsOne -= 50;
+                rareMineralsOne -= 40;
+                vRareMineralsOne -= 30;
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
+            }
+        }
+        else if (playerNum == 1)
+        {
+            if (commonMineralsTwo >= 50 && rareMineralsTwo >= 40 && vRareMineralsTwo >= 30)
+            {
+                commonMineralsTwo -= 50;
+                rareMineralsTwo -= 40;
+                vRareMineralsTwo -= 30;
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
+            }
+        }
+    }
+    public void BuyCommandSys()
+    {
+        if (playerNum == 2)
+        {
+            if (commonMineralsOne >= 20 && rareMineralsOne >= 10 && vRareMineralsOne >= 10)
+            {
+                commonMineralsOne -= 20;
+                rareMineralsOne -= 10;
+                vRareMineralsOne -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
+            }
+        }
+        else if (playerNum == 1)
+        {
+            if (commonMineralsTwo >= 20 && rareMineralsTwo >= 10 && vRareMineralsTwo >= 10)
+            {
+                commonMineralsTwo -= 20;
+                rareMineralsTwo -= 10;
+                vRareMineralsTwo -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
+            }
+        }
+    }
+    public void BuyMissileLaunch()
+    {
+        if (playerNum == 2)
+        {
+            if (commonMineralsOne >= 20 && rareMineralsOne >= 10)
+            {
+                commonMineralsOne -= 20;
+                rareMineralsOne -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
+            }
+        }
+        else if (playerNum == 1)
+        {
+            if (commonMineralsTwo >= 20 && rareMineralsTwo >= 10)
+            {
+                commonMineralsTwo -= 20;
+                rareMineralsTwo -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
+            }
+        }
+    }
+    public void BuyAntiMissile()
+    {
+        if (playerNum == 2)
+        {
+            if (commonMineralsOne >= 30 && rareMineralsOne >= 20 && vRareMineralsOne >= 10)
+            {
+                commonMineralsOne -= 30;
+                rareMineralsOne -= 20;
+                vRareMineralsOne -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
+            }
+        }
+        else if (playerNum == 1)
+        {
+            if (commonMineralsTwo >= 30 && rareMineralsTwo >= 20 && vRareMineralsTwo >= 10)
+            {
+                commonMineralsTwo -= 30;
+                rareMineralsTwo -= 20;
+                vRareMineralsTwo -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
+            }
+        }
+    }
+    public void BuyBeamWeap()
+    {
+        if (playerNum == 2)
+        {
+            if (commonMineralsOne >= 30 && rareMineralsOne >= 30 && vRareMineralsOne >= 10)
+            {
+                commonMineralsOne -= 30;
+                rareMineralsOne -= 30;
+                vRareMineralsOne -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
+            }
+        }
+        else if (playerNum == 1)
+        {
+            if (commonMineralsTwo >= 30 && rareMineralsTwo >= 30 && vRareMineralsTwo >= 10)
+            {
+                commonMineralsTwo -= 30;
+                rareMineralsTwo -= 30;
+                vRareMineralsTwo -= 10;
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
+            }
+        }
+    }
 }
