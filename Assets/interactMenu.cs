@@ -44,7 +44,7 @@ public class interactMenu : MonoBehaviour
         }*/
         if (CraftPanel.gameObject.activeSelf == true)
         {
-            if (Input.GetButtonDown("Escape"))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 foreach(GameObject pan in Panels)
                 {

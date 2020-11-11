@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndTurn : MonoBehaviour
 {
@@ -82,6 +83,8 @@ public class EndTurn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerOne = GameObject.FindWithTag("p1");
+        playerTwo = GameObject.FindWithTag("ship 2");
         playerTwo.GetComponent<PlayerController>().enabled = false;
 
         playerConRef = new PlayerController();
@@ -90,10 +93,37 @@ public class EndTurn : MonoBehaviour
         orgPos = shipRef.transform.position;
         
     }
+    //On end of turn, adds the appropriate amount of minerals
+    public void addMineral()
+    {
+        switch (playerNum)
+        {
+            case 2:
+                commonMineralsOne += (greenSystems * 30);
+                rareMineralsOne += (greenSystems * 20) + (blueSystems * 20);
+                vRareMineralsOne += (greenSystems * 10) + (redSystems * 20);
+                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
+                break;
+
+            case 1:
+                commonMineralsTwo += (greenSystems * 30);
+                rareMineralsTwo += (greenSystems * 20) + (blueSystems * 20);
+                vRareMineralsTwo += (greenSystems * 10) + (redSystems * 20);
+                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
+                break;
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
+
+        //Determine if all of a player's ships are destroyed
+        if(playerOne == null || playerTwo == null)
+        {
+
+            print("Game Over!");
+        }
 
         //Gets the number of systems owned
         greenSysText = greenSys.GetComponent<Text>();
@@ -105,26 +135,7 @@ public class EndTurn : MonoBehaviour
 
     }
 
-    //On end of turn, adds the appropriate amount of minerals
-    public void addMineral()
-    {
-        switch (playerNum)
-        {
-            case 2:
-                commonMineralsTwo += (greenSystems * 30);
-                rareMineralsTwo += (greenSystems * 20) + (blueSystems * 20);
-                vRareMineralsTwo += (greenSystems * 10) + (redSystems * 20);
-                addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMine Level: " + mineLevelOne;
-                break;
 
-            case 1:
-                commonMineralsOne += (greenSystems * 30);
-                rareMineralsOne += (greenSystems * 20) + (blueSystems * 20);
-                vRareMineralsOne += (greenSystems * 10) + (redSystems * 20);
-                addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMine Level: " + mineLevelTwo;
-                break;
-        }
-    }
 
     public void UpgradeMiner()
     {
