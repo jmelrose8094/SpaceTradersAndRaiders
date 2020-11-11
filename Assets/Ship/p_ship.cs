@@ -339,8 +339,14 @@ public class p_ship : MonoBehaviour
     public int GetNumAssaultMarines()
     {
         // To do: make a function to create a UI to ask the user how many marines that they want to use
+        int num =3;
+        //GameObject.Find("GameController").GetComponent<SpaceMarinePopUp>().PopUp();
 
-        int num = 3;
+       // num = int.Parse(GameObject.Find("GameController").GetComponent<SpaceMarinePopUp>().GetText());
+
+       // print("Num Input" + num);
+
+        
         return num;
     }
 
