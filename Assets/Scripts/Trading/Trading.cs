@@ -10,6 +10,7 @@ public class Trading : MonoBehaviour
     public UnityEngine.UI.Text pOneMins, pTwoMins;
     public int comOne, comTwo, rareOne, rareTwo, vRareOne, vRareTwo;
     public GameObject retrieval;
+    public Text minCount;
 
 
     // Start is called before the first frame update
@@ -27,7 +28,7 @@ public class Trading : MonoBehaviour
         rareOne = retrieval.GetComponent<EndTurn>().rareMineralsOne;
         rareTwo = retrieval.GetComponent<EndTurn>().rareMineralsTwo;
         vRareOne = retrieval.GetComponent<EndTurn>().vRareMineralsOne;
-        vRareTwo = retrieval.GetComponent<EndTurn>().rareMineralsTwo;
+        vRareTwo = retrieval.GetComponent<EndTurn>().vRareMineralsTwo;
 
         //Updates trading textbox
         pOneMins.text = "Common Minerals: " + comOne + "\nRare Minerals: " + rareOne + "\nVery Rare Minerals: " + vRareOne;
@@ -94,8 +95,8 @@ public class Trading : MonoBehaviour
 
         if (rareTwoPut <= rareTwo)
         {
-            retrieval.GetComponent<EndTurn>().rareMineralsOne -= rareTwoPut;
-            retrieval.GetComponent<EndTurn>().rareMineralsTwo += rareTwoPut;
+            retrieval.GetComponent<EndTurn>().rareMineralsTwo -= rareTwoPut;
+            retrieval.GetComponent<EndTurn>().rareMineralsOne += rareTwoPut;
         }
         else
         {
