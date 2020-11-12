@@ -98,25 +98,25 @@ public class EndTurn : MonoBehaviour
     {
             if (playerNum == 2)
             {
-                if (mineLevelTwo == 1)
+                if (mineLevelOne == 1)
                 {
                     commonMineralsOne += (greenSystems * 30);
                     rareMineralsOne += (greenSystems * 20) + (blueSystems * 40);
                     vRareMineralsOne += (greenSystems * 10) + (redSystems * 30);
                 }
-                if (mineLevelTwo == 2)
+                if (mineLevelOne == 2)
                 {
                     commonMineralsOne += (greenSystems * 60);
                     rareMineralsOne += (greenSystems * 40) + (blueSystems * 80);
                     vRareMineralsOne += (greenSystems * 20) + (redSystems * 60);
                 }
-                if (mineLevelTwo == 3)
+                if (mineLevelOne == 3)
                 {
                     commonMineralsOne += (greenSystems * 90);
                     rareMineralsOne += (greenSystems * 60) + (blueSystems * 120);
                     vRareMineralsOne += (greenSystems * 30) + (redSystems * 80);
                 }
-                if (mineLevelTwo == 4)
+                if (mineLevelOne == 4)
                 {
                     commonMineralsOne += (greenSystems * 120);
                     rareMineralsOne += (greenSystems * 80) + (blueSystems * 160);
@@ -126,9 +126,30 @@ public class EndTurn : MonoBehaviour
 
             else if (playerNum == 1)
             { 
-                commonMineralsTwo += (greenSystems * 30);
-                rareMineralsTwo += (greenSystems * 20) + (blueSystems * 20);
-                vRareMineralsTwo += (greenSystems * 10) + (redSystems * 20);
+                if (mineLevelTwo == 1)
+                {
+                    commonMineralsTwo += (greenSystems * 30);
+                    rareMineralsTwo += (greenSystems * 20) + (blueSystems * 40);
+                    vRareMineralsTwo += (greenSystems * 10) + (redSystems * 30);
+                }
+                if (mineLevelTwo == 2)
+                {
+                    commonMineralsTwo += (greenSystems * 60);
+                    rareMineralsTwo += (greenSystems * 40) + (blueSystems * 80);
+                    vRareMineralsTwo += (greenSystems * 20) + (redSystems * 60);
+                }
+                if (mineLevelTwo == 3)
+                {
+                    commonMineralsTwo += (greenSystems * 90);
+                    rareMineralsTwo += (greenSystems * 60) + (blueSystems * 120);
+                    vRareMineralsTwo += (greenSystems * 30) + (redSystems * 80);
+                }
+                if (mineLevelTwo == 4)
+                {
+                    commonMineralsTwo += (greenSystems * 120);
+                    rareMineralsTwo += (greenSystems * 80) + (blueSystems * 160);
+                    vRareMineralsTwo += (greenSystems * 40) + (redSystems * 120);
+                }
             }
     }
 

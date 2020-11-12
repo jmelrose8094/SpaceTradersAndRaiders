@@ -7,7 +7,7 @@ public class AddSystem : MonoBehaviour
 {
     public UnityEngine.UI.Text sysNum;
     public int playerOneSys = 0, playerTwoSys = 0, pTurn = 1;
-    public GameObject turnOrder;
+    public GameObject turnOrder, pOneMine, pTwoMine;
 
     private void Awake()
     {
@@ -26,6 +26,14 @@ public class AddSystem : MonoBehaviour
         {
             playerTwoSys += 1;
         }
+    }
+
+    public void owned()
+    {
+        if (pTurn == 1)
+            pOneMine.SetActive(true);
+        else if (pTurn == 2)
+            pTwoMine.SetActive(true);
     }
 
     public void Update()
