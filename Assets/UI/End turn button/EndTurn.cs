@@ -15,7 +15,7 @@ public class EndTurn : MonoBehaviour
     public Vector3 orgPos;
 
     public int turnNum = 1;
-    public int phaseNum = 1;
+    public int phaseNum = 1, fazeNum = 0;
 
     //Mining Related Variables
     public Text addMinText;
@@ -23,7 +23,7 @@ public class EndTurn : MonoBehaviour
 
     public Text greenSysText, redSysText, blueSysText;
     public int greenSystems, redSystems, blueSystems;
-    public int commonMineralsOne, rareMineralsOne, vRareMineralsOne, commonMineralsTwo, rareMineralsTwo, vRareMineralsTwo;
+    public int commonMineralsOne = 50, rareMineralsOne = 30, vRareMineralsOne = 20, commonMineralsTwo = 50, rareMineralsTwo = 30, vRareMineralsTwo = 20;
     public int mineLevelOne = 1, mineLevelTwo = 1;
 
 
@@ -66,6 +66,11 @@ public class EndTurn : MonoBehaviour
             phaseNum = 2;
             Textfield.text = "Turn " + turnNum + "\nSecond Phase";
         }
+
+        if (playerNum == 2 && phaseNum == 1)
+            fazeNum = 2;
+        else if (playerNum == 1 && phaseNum == 2)
+            fazeNum = 1;
     }
 
     //Basic Function that resets the position of the ship to its starting position
@@ -96,60 +101,62 @@ public class EndTurn : MonoBehaviour
     //On end of turn, adds the appropriate amount of minerals
     public void addMineral()
     {
-            if (playerNum == 2)
+            if (playerNum == 2 && fazeNum == 1)
             {
                 if (mineLevelOne == 1)
                 {
-                    commonMineralsOne += (greenSystems * 30);
-                    rareMineralsOne += (greenSystems * 20) + (blueSystems * 40);
-                    vRareMineralsOne += (greenSystems * 10) + (redSystems * 30);
+                    commonMineralsOne += (greenSystems * 30)+ 50;
+                    rareMineralsOne += (greenSystems * 20) + (blueSystems * 40) + 30;
+                    vRareMineralsOne += (greenSystems * 10) + (redSystems * 30) + 20;
                 }
                 if (mineLevelOne == 2)
                 {
-                    commonMineralsOne += (greenSystems * 60);
-                    rareMineralsOne += (greenSystems * 40) + (blueSystems * 80);
-                    vRareMineralsOne += (greenSystems * 20) + (redSystems * 60);
+                    commonMineralsOne += (greenSystems * 60) + 100;
+                    rareMineralsOne += (greenSystems * 40) + (blueSystems * 80) + 60;
+                    vRareMineralsOne += (greenSystems * 20) + (redSystems * 60) + 40;
                 }
                 if (mineLevelOne == 3)
                 {
-                    commonMineralsOne += (greenSystems * 90);
-                    rareMineralsOne += (greenSystems * 60) + (blueSystems * 120);
-                    vRareMineralsOne += (greenSystems * 30) + (redSystems * 80);
+                    commonMineralsOne += (greenSystems * 90) + 150;
+                    rareMineralsOne += (greenSystems * 60) + (blueSystems * 120) + 90;
+                    vRareMineralsOne += (greenSystems * 30) + (redSystems * 80) + 60;
                 }
                 if (mineLevelOne == 4)
                 {
-                    commonMineralsOne += (greenSystems * 120);
-                    rareMineralsOne += (greenSystems * 80) + (blueSystems * 160);
-                    vRareMineralsOne += (greenSystems * 40) + (redSystems * 120);
+                    commonMineralsOne += (greenSystems * 120) + 200;
+                    rareMineralsOne += (greenSystems * 80) + (blueSystems * 160) + 120;
+                    vRareMineralsOne += (greenSystems * 40) + (redSystems * 120) + 80;
                 }
+            fazeNum = 0;
             }
 
-            else if (playerNum == 1)
+            if (playerNum == 1 && fazeNum == 2)
             { 
                 if (mineLevelTwo == 1)
                 {
-                    commonMineralsTwo += (greenSystems * 30);
-                    rareMineralsTwo += (greenSystems * 20) + (blueSystems * 40);
-                    vRareMineralsTwo += (greenSystems * 10) + (redSystems * 30);
+                    commonMineralsTwo += (greenSystems * 30) + 50;
+                    rareMineralsTwo += (greenSystems * 20) + (blueSystems * 40) + 30;
+                    vRareMineralsTwo += (greenSystems * 10) + (redSystems * 30) + 20;
                 }
                 if (mineLevelTwo == 2)
                 {
-                    commonMineralsTwo += (greenSystems * 60);
-                    rareMineralsTwo += (greenSystems * 40) + (blueSystems * 80);
-                    vRareMineralsTwo += (greenSystems * 20) + (redSystems * 60);
+                    commonMineralsTwo += (greenSystems * 60) + 100;
+                    rareMineralsTwo += (greenSystems * 40) + (blueSystems * 80) + 60;
+                    vRareMineralsTwo += (greenSystems * 20) + (redSystems * 60) + 40;
                 }
                 if (mineLevelTwo == 3)
                 {
-                    commonMineralsTwo += (greenSystems * 90);
-                    rareMineralsTwo += (greenSystems * 60) + (blueSystems * 120);
-                    vRareMineralsTwo += (greenSystems * 30) + (redSystems * 80);
+                    commonMineralsTwo += (greenSystems * 90) + 150;
+                    rareMineralsTwo += (greenSystems * 60) + (blueSystems * 120) + 90;
+                    vRareMineralsTwo += (greenSystems * 30) + (redSystems * 80) + 60;
                 }
                 if (mineLevelTwo == 4)
                 {
-                    commonMineralsTwo += (greenSystems * 120);
-                    rareMineralsTwo += (greenSystems * 80) + (blueSystems * 160);
-                    vRareMineralsTwo += (greenSystems * 40) + (redSystems * 120);
+                    commonMineralsTwo += (greenSystems * 120) + 200;
+                    rareMineralsTwo += (greenSystems * 80) + (blueSystems * 160) + 120;
+                    vRareMineralsTwo += (greenSystems * 40) + (redSystems * 120) + 80;
                 }
+            fazeNum = 0;
             }
     }
 

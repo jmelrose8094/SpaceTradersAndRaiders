@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Activation;
+//using System.Runtime.Remoting.Activation;
 using UnityEngine;
 
 public class p_repairSystem : Component
