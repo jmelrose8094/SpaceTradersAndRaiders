@@ -12,6 +12,7 @@ using UnityEngine;
 public class p_ship : MonoBehaviour
 {
     public int owner = 1;
+    public GameObject GC;
     public List<Component> arrComponents = new List<Component>();
     public List<spaceMarine> marines = new List<spaceMarine>();
     public List<spaceMarine> enemyMarines = new List<spaceMarine>();
@@ -38,6 +39,7 @@ public class p_ship : MonoBehaviour
         numSpaceMarines = marines.Count;
         numActiveMarines = numSpaceMarines;
         numEnemyMarines = 0;
+        GC = GameObject.Find("GameController");
     }
     public p_ship()
     {
@@ -64,6 +66,14 @@ public class p_ship : MonoBehaviour
         numArmor = a;
     }
 
+    public void RollUIHandler(float roll, int level)
+    {
+        GC.GetComponent<RollPopUp>().PopUp();
+        GC.GetComponent<RollPopUp>().SetAttackerText(roll);
+        GC.GetComponent<RollPopUp>().SetDefenderText(level);
+        
+
+    }
 
     // --------------------------------------------------- This ship attacks ship at the target parameter
 
@@ -76,7 +86,10 @@ public class p_ship : MonoBehaviour
         print("In attack");
         print(target.numArmor);
 
+        //RollUIHandler(3, 4);
+
         //------------------------------------------ Beam
+
 
         for (int i = 0; i < arrComponents.Count; i++)
         {
