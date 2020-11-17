@@ -36,18 +36,18 @@ public class AddSystem : MonoBehaviour
             pTwoMine.SetActive(true);
     }
 
-    public void Update()
-    {
-        pTurn = turnOrder.GetComponent<EndTurn>().playerNum;
+    //public void Update()
+    //{
+    //    pTurn = turnOrder.GetComponent<EndTurn>().playerNum;
 
-        if (pTurn == 1)
-        {
-            sysNum.text = " " + playerOneSys;
-        }
+    //    if (pTurn == 1)
+    //    {
+    //        sysNum.text = " " + playerOneSys;
+    //    }
 
-        if (pTurn == 2)
-        {
-            sysNum.text = " " + playerTwoSys;
-        }
-    }
+    //    if (pTurn == 2)
+    //    {
+    //        sysNum.text = " " + playerTwoSys;
+    //    }
+    //}
 }

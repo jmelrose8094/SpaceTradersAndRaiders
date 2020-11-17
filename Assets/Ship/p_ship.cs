@@ -66,18 +66,59 @@ public class p_ship : MonoBehaviour
         numArmor = a;
     }
 
-    public void RollUIHandler(float roll, int level)
+    public void RollUIHandler(int roll, int level, string location)
     {
         GC.GetComponent<RollPopUp>().PopUp();
-        GC.GetComponent<RollPopUp>().SetAttackerText(roll);
-        GC.GetComponent<RollPopUp>().SetDefenderText(level);
-        
+
+        switch(location)
+        {
+            case "beam":
+                GC.GetComponent<RollPopUp>().SetAttackerText(roll);
+                GC.GetComponent<RollPopUp>().SetDefenderText(level);
+                GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP2_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Firing Beam Weapon");
+                break;
+            case "missile":
+                GC.GetComponent<RollPopUp>().SetAttackerText(roll);
+                GC.GetComponent<RollPopUp>().SetDefenderText(level);
+                GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP2_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Firing Missile");
+                break;
+            case "shield":
+                GC.GetComponent<RollPopUp>().SetAttackerText(level);
+                GC.GetComponent<RollPopUp>().SetDefenderText(roll);
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP1_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Deflecting Beam");
+                break;
+            case "anti-missile":
+                GC.GetComponent<RollPopUp>().SetAttackerText(level);
+                GC.GetComponent<RollPopUp>().SetDefenderText(roll);
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP1_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Blocking Missile");
+                break;
+            default:
+                GC.GetComponent<RollPopUp>().SetAttackerText(roll);
+                GC.GetComponent<RollPopUp>().SetDefenderText(level);
+                GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP2_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Firing nothing");
+                break;
+        }
+
 
     }
 
     // --------------------------------------------------- This ship attacks ship at the target parameter
+    public void AttackTest(p_ship target)
+    {
+        StartCoroutine(Attack(target));
+    }
 
-    public void Attack(p_ship target)
+    public IEnumerator Attack(p_ship target)
     {
         int beamHit = 0; // number of beam weapons that need to be calculated against shields
         int missileHit = 0; //number of missiles that need top be calculated against anitmissiles
@@ -93,9 +134,26 @@ public class p_ship : MonoBehaviour
 
         for (int i = 0; i < arrComponents.Count; i++)
         {
-            if (arrComponents[i] is p_beamWeapon && FireBeam(i) == true && arrComponents[i].getActivity() == true)
+            Tuple<bool, int> temp;
+            GC.GetComponent<RollPopUp>().Close();
+            if (arrComponents[i] is p_beamWeapon && arrComponents[i].getActivity() == true)
             {
-                beamHit++;
+                temp = FireBeam(i);
+                if(temp.Item1 == true)
+                {
+                    beamHit++;
+
+                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "beam");
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
+                }
+                else
+                {
+                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "beam");
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
+                }
+                
             }
         }
         print(beamHit);
@@ -104,9 +162,24 @@ public class p_ship : MonoBehaviour
 
         for (int i = 0; i < arrComponents.Count; i++)
         {
-            if (arrComponents[i] is p_missileLauncher && FireMissile(i) == true && arrComponents[i].getActivity() == true)
+            Tuple<bool, int> temp;
+            if (arrComponents[i] is p_missileLauncher && arrComponents[i].getActivity() == true)
             {
-                missileHit++;
+                temp = FireMissile(i);
+                if (temp.Item1 == true)
+                {
+                    missileHit++;
+
+                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "missile");
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
+                }
+                else
+                {
+                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "missile");
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
+                }
             }
         }
 
@@ -116,7 +189,35 @@ public class p_ship : MonoBehaviour
 
         if (target.HasShields() == true)
         {
-            dmgHits = ShieldDeflect(beamHit, target);
+            int shieldGenLoc = 0;
+            for (int i = 0; i < target.arrComponents.Count; i++)
+            {
+                if (target.arrComponents[i] is p_sheildGenerator && arrComponents[i].getActivity() == true)
+                {
+                    shieldGenLoc = i;
+                    break;
+                }
+            }
+
+            for(int i = 0; i<beamHit; i++)
+            {
+                Tuple<bool, int> temp;
+                temp = ShieldDeflect(shieldGenLoc, target);
+
+                if(temp.Item1 == true)
+                {
+                    dmgHits++;
+                    RollUIHandler(arrComponents[shieldGenLoc].getLevel(), temp.Item2, "shield");
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
+                }
+                else
+                {
+                    RollUIHandler(arrComponents[shieldGenLoc].getLevel(), temp.Item2, "shield");
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
+                }
+            }
         }
         else
         {
@@ -127,8 +228,41 @@ public class p_ship : MonoBehaviour
 
        if(target.HasAntiMissile() == true)
        {
-            dmgHits = dmgHits + MissileDeflect(missileHit, target);
-       }
+            Tuple<bool, int> temp;
+            for (int i = 0; i < target.arrComponents.Count; i++)
+            {
+                if(missileHit <= 0)
+                {
+                    break;
+                }
+                else if (target.arrComponents[i] is p_antiMissile && arrComponents[i].getActivity() == true)
+                {
+                    temp = MissileDeflect(i, target);
+
+                    if(temp.Item1 == true)
+                    {
+                        dmgHits++;
+                        missileHit--;
+                        RollUIHandler(arrComponents[i].getLevel(), temp.Item2, "anti-missile");
+                        yield return new WaitForSeconds(3f);
+                        GC.GetComponent<RollPopUp>().Close();
+                    }
+                    else
+                    {
+                        missileHit--;
+                        RollUIHandler(arrComponents[i].getLevel(), temp.Item2, "anti-missile");
+                        yield return new WaitForSeconds(3f);
+                        GC.GetComponent<RollPopUp>().Close();
+                    }
+                }
+            }
+
+            if(missileHit > 0)
+            {
+                dmgHits = dmgHits + missileHit;
+            }
+
+        }
         else
         {
             dmgHits = dmgHits + missileHit;
@@ -345,8 +479,6 @@ public class p_ship : MonoBehaviour
     }
 
 
-    
-
     // ------------------------------------- Ask the player how many marines they want to use in the assault
 
     public int GetNumAssaultMarines()
@@ -405,91 +537,64 @@ public class p_ship : MonoBehaviour
 
 
     //determines the amount of beam weapons that have a chance of hitting the enemy ship
-    private bool FireBeam(int wep)
+    private Tuple<bool, int> FireBeam(int wep)
     {
-        if(arrComponents[wep].getLevel() >= UnityEngine.Random.Range(1f, 6f))
+        int roll;
+        roll = UnityEngine.Random.Range(1, 6);
+        if (arrComponents[wep].getLevel() >= roll)
         {
-            return (true);
+            return Tuple.Create(true, roll);
         }
         else
         {
-            return (false);
+            return Tuple.Create(false, roll);
         }
 
 
     }
 
     //determines the amount of missiles that have a chance of hitting the enemy ship
-    private bool FireMissile(int wep)
+    private Tuple<bool, int> FireMissile(int wep)
     {
-        if (arrComponents[wep].getLevel() >= UnityEngine.Random.Range(1f, 6f))
+        int roll;
+        roll = UnityEngine.Random.Range(1, 6);
+        if (arrComponents[wep].getLevel() >= roll)
         {
-            return (true);
+            return Tuple.Create(true, roll);
         }
         else
         {
-            return (false);
+            return Tuple.Create(false, roll);
         }
-
-
     }
 
     //determines the amount of beam waepons that actually hit the ship
-    private int ShieldDeflect(int hits, p_ship target)
+    private Tuple<bool, int> ShieldDeflect(int loc, p_ship target)
     {
-        int shieldGenLoc = 0;
-        int dmg = 0;
-        for(int i = 0; i<target.arrComponents.Count; i++)
-        {
-            if(target.arrComponents[i] is p_sheildGenerator && arrComponents[i].getActivity() == true)
-            {
-                shieldGenLoc = i;
-                break;
-            }
-        }
+        int roll = UnityEngine.Random.Range(1, 6);
 
-        for(int i=0; i<hits; i++)
+        if(target.arrComponents[loc].getLevel() <= roll )
         {
-            if(target.arrComponents[shieldGenLoc].getLevel() <= UnityEngine.Random.Range(1f, 6f))
-            {
-                dmg++;
-            }
+            return Tuple.Create(true, roll);
         }
-
-        return dmg;
+        else
+        {
+            return Tuple.Create(false, roll);
+        }
     }
 
     //determines the amount of missiles that actually hit the ship
-    private int MissileDeflect(int hits, p_ship target)
+    private Tuple<bool, int> MissileDeflect(int AMLoc, p_ship target)
     {
-        int dmg = 0;
-        int[] AMLocations = new int[target.numAntiMissile];
-
-        for (int i =0; i<target.arrComponents.Count; i++)
+        int roll = UnityEngine.Random.Range(1, 6);
+        if (target.arrComponents[AMLoc].getLevel() >= roll)
         {
-            int j = 0;
-            if(target.arrComponents[i] is p_antiMissile && arrComponents[i].getActivity() == true)
-            {
-                AMLocations[j] = i;
-                j++;
-            }
+            return Tuple.Create(true, roll);
         }
-
-        for(int i = 0; i<target.numAntiMissile; i++)
+        else
         {
-            if(target.arrComponents[AMLocations[i]].getLevel() >= UnityEngine.Random.Range(1f, 6f))
-            {
-                dmg++;
-            }
+            return Tuple.Create(false, roll);
         }
-
-        if(hits > target.numAntiMissile)
-        {
-            dmg = dmg + (hits - target.numAntiMissile);
-        }
-
-        return (dmg);
-        
     }
 
     // determines if this ship has any shields 
@@ -544,31 +649,29 @@ public class p_ship : MonoBehaviour
     {
         numEnemyMarines--;
     }
+
+    // -------------------------------------- Accessors
+
     public int GetMarinesSize()
     {
         return marines.Count;
     }
-
     public int GetEnemyMarineSize()
     {
         return enemyMarines.Count;
     }
-
     public int GetNumSpaceMarines()
     {
         return numSpaceMarines;
     }
-
     public int GetNumActiveMarines()
     {
         return numActiveMarines;
     }
-
     public int GetNumEnemy()
     {
         return numEnemyMarines;
     }
-
     public int GetNumBeam()
     {
         return numBeamWeapons;
@@ -597,7 +700,6 @@ public class p_ship : MonoBehaviour
     {
         return numCommandSys;
     }
-    
     public int GetNumEngine()
     {
         return numEngines;

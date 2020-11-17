@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RollPopUp : MonoBehaviour
 {
     public GameObject popUpBox;
-    public Text text1, text2;
+    public Text roll1, roll2, p1_text, p2_text, firing;
 
     public void PopUp()
     {
@@ -18,14 +18,29 @@ public class RollPopUp : MonoBehaviour
         popUpBox.SetActive(false);
     }
 
-    public void SetAttackerText(float roll)
+    public void SetAttackerText(int roll)
     {
-        text1.text = roll.ToString();
+        roll1.text = roll.ToString();
     }
 
     public void SetDefenderText(int level)
     {
-        text2.text = level.ToString();
+        roll2.text = level.ToString();
+    }
+
+    public void SetP1_Text(string text)
+    {
+        p1_text.text = text;
+    }
+
+    public void SetP2_Text(string text)
+    {
+        p2_text.text = text;
+    }
+
+    public void SetFiringText(string text)
+    {
+        firing.text = text;
     }
 
 }
