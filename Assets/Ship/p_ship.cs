@@ -72,33 +72,69 @@ public class p_ship : MonoBehaviour
 
         switch(location)
         {
-            case "beam":
+            case "beam hit":
                 GC.GetComponent<RollPopUp>().SetAttackerText(roll);
                 GC.GetComponent<RollPopUp>().SetDefenderText(level);
                 GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
                 GC.GetComponent<RollPopUp>().SetP2_Text("Tech Level: ");
                 GC.GetComponent<RollPopUp>().SetFiringText("Firing Beam Weapon");
+                GC.GetComponent<RollPopUp>().SetHitText("Hit!");
                 break;
-            case "missile":
+            case "beam miss":
+                GC.GetComponent<RollPopUp>().SetAttackerText(roll);
+                GC.GetComponent<RollPopUp>().SetDefenderText(level);
+                GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP2_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Firing Beam Weapon");
+                GC.GetComponent<RollPopUp>().SetHitText("Miss!");
+                break;
+            case "missile hit":
                 GC.GetComponent<RollPopUp>().SetAttackerText(roll);
                 GC.GetComponent<RollPopUp>().SetDefenderText(level);
                 GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
                 GC.GetComponent<RollPopUp>().SetP2_Text("Tech Level: ");
                 GC.GetComponent<RollPopUp>().SetFiringText("Firing Missile");
+                GC.GetComponent<RollPopUp>().SetHitText("Hit!");
                 break;
-            case "shield":
+            case "missile miss":
+                GC.GetComponent<RollPopUp>().SetAttackerText(roll);
+                GC.GetComponent<RollPopUp>().SetDefenderText(level);
+                GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP2_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Firing Missile");
+                GC.GetComponent<RollPopUp>().SetHitText("Miss!");
+                break;
+            case "shield deflect":
                 GC.GetComponent<RollPopUp>().SetAttackerText(level);
                 GC.GetComponent<RollPopUp>().SetDefenderText(roll);
                 GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
                 GC.GetComponent<RollPopUp>().SetP1_Text("Tech Level: ");
                 GC.GetComponent<RollPopUp>().SetFiringText("Deflecting Beam");
+                GC.GetComponent<RollPopUp>().SetHitText("Deflected!");
                 break;
-            case "anti-missile":
+            case "shield break":
+                GC.GetComponent<RollPopUp>().SetAttackerText(level);
+                GC.GetComponent<RollPopUp>().SetDefenderText(roll);
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP1_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Deflecting Beam");
+                GC.GetComponent<RollPopUp>().SetHitText("Hit!");
+                break;
+            case "anti-missile hit":
                 GC.GetComponent<RollPopUp>().SetAttackerText(level);
                 GC.GetComponent<RollPopUp>().SetDefenderText(roll);
                 GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
                 GC.GetComponent<RollPopUp>().SetP1_Text("Tech Level: ");
                 GC.GetComponent<RollPopUp>().SetFiringText("Blocking Missile");
+                GC.GetComponent<RollPopUp>().SetHitText("Hit!");
+                break;
+            case "anti-missile blocked":
+                GC.GetComponent<RollPopUp>().SetAttackerText(level);
+                GC.GetComponent<RollPopUp>().SetDefenderText(roll);
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP1_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Blocking Missile");
+                GC.GetComponent<RollPopUp>().SetHitText("Blocked!");
                 break;
             default:
                 GC.GetComponent<RollPopUp>().SetAttackerText(roll);
@@ -110,6 +146,24 @@ public class p_ship : MonoBehaviour
         }
 
 
+    }
+
+    public void DmgAssesmentHandler(p_ship target)
+    {
+        string disabledComponent = "";
+
+        GC.GetComponent<DamageAssesmentUI>().PopUp();
+        GC.GetComponent<DamageAssesmentUI>().SetArmorText(target.numArmor);
+        GC.GetComponent<DamageAssesmentUI>().SetCritText(target.numCriticalHits);
+
+        for(int i = 0; i<target.arrComponents.Count; i++)
+        {
+            if(target.arrComponents[i].getActivity() == false)
+            {
+                disabledComponent = disabledComponent + target.arrComponents[i].toString();
+            }
+        }
+        GC.GetComponent<DamageAssesmentUI>().SetDisabledComponents(disabledComponent);
     }
 
     // --------------------------------------------------- This ship attacks ship at the target parameter
@@ -143,13 +197,13 @@ public class p_ship : MonoBehaviour
                 {
                     beamHit++;
 
-                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "beam");
+                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "beam hit");
                     yield return new WaitForSeconds(3f);
                     GC.GetComponent<RollPopUp>().Close();
                 }
                 else
                 {
-                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "beam");
+                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "beam miss");
                     yield return new WaitForSeconds(3f);
                     GC.GetComponent<RollPopUp>().Close();
                 }
@@ -170,13 +224,13 @@ public class p_ship : MonoBehaviour
                 {
                     missileHit++;
 
-                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "missile");
+                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "missile hit");
                     yield return new WaitForSeconds(3f);
                     GC.GetComponent<RollPopUp>().Close();
                 }
                 else
                 {
-                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "missile");
+                    RollUIHandler(temp.Item2, arrComponents[i].getLevel(), "missile miss");
                     yield return new WaitForSeconds(3f);
                     GC.GetComponent<RollPopUp>().Close();
                 }
@@ -207,13 +261,13 @@ public class p_ship : MonoBehaviour
                 if(temp.Item1 == true)
                 {
                     dmgHits++;
-                    RollUIHandler(arrComponents[shieldGenLoc].getLevel(), temp.Item2, "shield");
+                    RollUIHandler(arrComponents[shieldGenLoc].getLevel(), temp.Item2, "shield break");
                     yield return new WaitForSeconds(3f);
                     GC.GetComponent<RollPopUp>().Close();
                 }
                 else
                 {
-                    RollUIHandler(arrComponents[shieldGenLoc].getLevel(), temp.Item2, "shield");
+                    RollUIHandler(arrComponents[shieldGenLoc].getLevel(), temp.Item2, "shield deflect");
                     yield return new WaitForSeconds(3f);
                     GC.GetComponent<RollPopUp>().Close();
                 }
@@ -243,14 +297,14 @@ public class p_ship : MonoBehaviour
                     {
                         dmgHits++;
                         missileHit--;
-                        RollUIHandler(arrComponents[i].getLevel(), temp.Item2, "anti-missile");
+                        RollUIHandler(arrComponents[i].getLevel(), temp.Item2, "anti-missile hit");
                         yield return new WaitForSeconds(3f);
                         GC.GetComponent<RollPopUp>().Close();
                     }
                     else
                     {
                         missileHit--;
-                        RollUIHandler(arrComponents[i].getLevel(), temp.Item2, "anti-missile");
+                        RollUIHandler(arrComponents[i].getLevel(), temp.Item2, "anti-missile blocked");
                         yield return new WaitForSeconds(3f);
                         GC.GetComponent<RollPopUp>().Close();
                     }
@@ -311,7 +365,11 @@ public class p_ship : MonoBehaviour
 
         // -------------------------------------- Critical Hits
 
-        if(target.numCriticalHits <= 0)
+        DmgAssesmentHandler(target);
+        yield return new WaitForSeconds(5f);
+        GC.GetComponent<DamageAssesmentUI>().Close();
+
+        if (target.numCriticalHits <= 0)
         {
             Destroy(target);
             Destroy(GameObject.FindGameObjectWithTag("ship 2"));

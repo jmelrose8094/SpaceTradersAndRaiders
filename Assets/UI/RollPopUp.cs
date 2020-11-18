@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RollPopUp : MonoBehaviour
 {
     public GameObject popUpBox;
-    public Text roll1, roll2, p1_text, p2_text, firing;
+    public Text roll1, roll2, p1_text, p2_text, firing, hit;
 
     public void PopUp()
     {
@@ -43,4 +43,8 @@ public class RollPopUp : MonoBehaviour
         firing.text = text;
     }
 
+    public void SetHitText(string text)
+    {
+        hit.text = text;
+    }
 }
