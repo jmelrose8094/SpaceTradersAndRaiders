@@ -136,6 +136,54 @@ public class p_ship : MonoBehaviour
                 GC.GetComponent<RollPopUp>().SetFiringText("Blocking Missile");
                 GC.GetComponent<RollPopUp>().SetHitText("Blocked!");
                 break;
+            case "marine assault success":
+                GC.GetComponent<RollPopUp>().SetAttackerText(level);
+                GC.GetComponent<RollPopUp>().SetDefenderText(roll);
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP1_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Space Marine Assault");
+                GC.GetComponent<RollPopUp>().SetHitText("Marine boarded");
+                break;
+            case "marine assault fail":
+                GC.GetComponent<RollPopUp>().SetAttackerText(level);
+                GC.GetComponent<RollPopUp>().SetDefenderText(roll);
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP1_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Space Marine Assault");
+                GC.GetComponent<RollPopUp>().SetHitText("Marine failed to board");
+                break;
+            case "marine assault fail destroyed":
+                GC.GetComponent<RollPopUp>().SetAttackerText(level);
+                GC.GetComponent<RollPopUp>().SetDefenderText(roll);
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP1_Text("Tech Level: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Space Marine Assault");
+                GC.GetComponent<RollPopUp>().SetHitText("Marine was destroyed");
+                break;
+            case "marine vs marine success":
+                GC.GetComponent<RollPopUp>().SetAttackerText(roll);
+                GC.GetComponent<RollPopUp>().SetDefenderText(level);
+                GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Space Marine vs Space Marine");
+                GC.GetComponent<RollPopUp>().SetHitText("Enemy marine was destroyed");
+                break;
+            case "marine vs marine fail":
+                GC.GetComponent<RollPopUp>().SetAttackerText(roll);
+                GC.GetComponent<RollPopUp>().SetDefenderText(level);
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Space Marine vs Space Marine");
+                GC.GetComponent<RollPopUp>().SetHitText("Friendly marine was destroyed");
+                break;
+            case "marine vs marine tie":
+                GC.GetComponent<RollPopUp>().SetAttackerText(roll);
+                GC.GetComponent<RollPopUp>().SetDefenderText(level);
+                GC.GetComponent<RollPopUp>().SetP2_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetP1_Text("Roll: ");
+                GC.GetComponent<RollPopUp>().SetFiringText("Space Marine vs Space Marine");
+                GC.GetComponent<RollPopUp>().SetHitText("Both marines destroyed");
+                break;
             default:
                 GC.GetComponent<RollPopUp>().SetAttackerText(roll);
                 GC.GetComponent<RollPopUp>().SetDefenderText(level);
@@ -166,10 +214,21 @@ public class p_ship : MonoBehaviour
         GC.GetComponent<DamageAssesmentUI>().SetDisabledComponents(disabledComponent);
     }
 
+    public void MarineAssaultAssesmentHandler(string s)
+    {
+        GC.GetComponent<MarineAssaultAssesment>().PopUp();
+        GC.GetComponent<MarineAssaultAssesment>().SetText(s);
+    }
+
     // --------------------------------------------------- This ship attacks ship at the target parameter
-    public void AttackTest(p_ship target)
+    public void LaunchAttack(p_ship target)
     {
         StartCoroutine(Attack(target));
+    }
+
+    public void LaunchMarineAssault(p_ship target)
+    {
+        StartCoroutine(MarineAssault(target));
     }
 
     public IEnumerator Attack(p_ship target)
@@ -381,7 +440,7 @@ public class p_ship : MonoBehaviour
 
     //  -------------------------------------- Space Marine Combat
 
-    public void MarineAssault(p_ship target)
+    public IEnumerator MarineAssault(p_ship target)
     {
         int numMarinesUsed, disadvantage = 0;
         bool boardSuccessful = false;
@@ -393,24 +452,35 @@ public class p_ship : MonoBehaviour
         int i = 0;
         while(i<numMarinesUsed && marines.Count>=1)
         {
+            Tuple<bool, int> temp;
             if(marines[i] != null && marines[(i)].GetActivity() == true)
             {
-                if(MarineRoll(disadvantage, (i)))
+                temp = MarineRoll(disadvantage, (i));
+                if (temp.Item1 == true)
                 {
-
+                    RollUIHandler(temp.Item2, marines[i].getLevel(), "marine assault success");
                     TransferMarine(marines[(i)], (i), target);
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
 
                 }
-                else if(!MarineRoll(disadvantage, (i)))
+                else if(!temp.Item1)
                 {
                     if(target.HasShields())
                     {
+                        RollUIHandler(temp.Item2, marines[i].getLevel(), "marine assault fail destroyed");
+                        yield return new WaitForSeconds(3f);
+                        GC.GetComponent<RollPopUp>().Close();
                         marines.RemoveAt(i);
                         numSpaceMarines--;
                         numActiveMarines--;
+
                     }
                     else
                     {
+                        RollUIHandler(temp.Item2, marines[i].getLevel(), "marine assault fail");
+                        yield return new WaitForSeconds(3f);
+                        GC.GetComponent<RollPopUp>().Close();
                         marines[(i)].ToggleActive();
                         numActiveMarines--;
                         i++;
@@ -432,22 +502,31 @@ public class p_ship : MonoBehaviour
             // Each player rolls until one side no longer has any space marines
             do
             {
-                float friendlyRoll = 0, enemyRoll = 0;
-                friendlyRoll = UnityEngine.Random.Range(1f, 6f);
-                enemyRoll = UnityEngine.Random.Range(1f, 6f);
+                int friendlyRoll = 0, enemyRoll = 0;
+                friendlyRoll = UnityEngine.Random.Range(1, 6);
+                enemyRoll = UnityEngine.Random.Range(1, 6);
 
                 if (friendlyRoll > enemyRoll)
                 {
+                    RollUIHandler(friendlyRoll, enemyRoll, "marine vs marine success");
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
                     target.marines.RemoveAt(0);
                     target.DecMarine();
                 }
                 else if (friendlyRoll < enemyRoll)
                 {
+                    RollUIHandler(friendlyRoll, enemyRoll, "marine vs marine fail");
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
                     target.enemyMarines.RemoveAt(0);
                     target.DecEnemyMarine();
                 }
                 else
                 {
+                    RollUIHandler(friendlyRoll, enemyRoll, "marine vs marine tie");
+                    yield return new WaitForSeconds(3f);
+                    GC.GetComponent<RollPopUp>().Close();
                     target.enemyMarines.RemoveAt(0);
                     target.marines.RemoveAt(0);
                     target.DecEnemyMarine();
@@ -472,10 +551,16 @@ public class p_ship : MonoBehaviour
         
         if(boardSuccessful == true)
         {
+            MarineAssaultAssesmentHandler("Enemy ship was captured!");
+            yield return new WaitForSeconds(5f);
+            GC.GetComponent<MarineAssaultAssesment>().Close();
             print("Ship Captured");
         }
         else
         {
+            MarineAssaultAssesmentHandler("Enemy ship was not captured!");
+            yield return new WaitForSeconds(5f);
+            GC.GetComponent<MarineAssaultAssesment>().Close();
             print("Failed Attempt");
             print(target.GetNumSpaceMarines());
             print(target.GetNumEnemy());
@@ -511,15 +596,16 @@ public class p_ship : MonoBehaviour
 
     // ---------------------------------------- Rolls dice for marine
 
-    public bool MarineRoll(int dis, int i)
+    public Tuple<bool, int> MarineRoll(int dis, int i)
     {
-        if (marines[i].getLevel() >= UnityEngine.Random.Range(1f, 6f) + dis)
+        int roll = UnityEngine.Random.Range(1, 6) + dis;
+        if (marines[i].getLevel() >= roll)
         {
-            return (true);
+            return Tuple.Create(true, roll);
         }
         else
         {
-            return (false);
+            return Tuple.Create(false, roll);
         }
     }
 
