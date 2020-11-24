@@ -7,6 +7,7 @@ public class SpaceMarinePopUp : MonoBehaviour
 {
     public GameObject popUpBox;
     public GameObject IF;
+    public bool clicked = false;
 
     public void PopUp()
     {
@@ -21,5 +22,15 @@ public class SpaceMarinePopUp : MonoBehaviour
     public string GetText()
     {
         return IF.GetComponent<Text>().text;
+    }
+
+    public void OnClick()
+    {
+        clicked = !clicked;
+    }
+
+    public bool GetClicked()
+    {
+        return clicked;
     }
 }

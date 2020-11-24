@@ -28,9 +28,36 @@ public class EndTurn : MonoBehaviour
 
 
     //Player Variables
+    public GameObject gameController;
     public GameObject playerOne;
     public GameObject playerTwo;
     public int playerNum = 1;
+
+    // Invokes the reset function in the p_ship class for all of a single players ships
+    public void ResetShips()
+    {
+        List<GameObject> temp1 = gameController.GetComponent<GameController>().GetPlayerOneShips();
+        List<GameObject> temp2 = gameController.GetComponent<GameController>().GetPlayerTwoShips();
+
+        switch (playerNum)
+        {
+            case 1:
+                for (int i = 0; i < (gameController.GetComponent<GameController>().GetPlayerOneShips().Count); i++)
+                {
+                    temp1[i].GetComponent<p_ship>().Reset();
+                }
+                break;
+            case 2:
+                for (int i = 0; i < (gameController.GetComponent<GameController>().GetPlayerTwoShips().Count); i++)
+                {
+                    temp2[i].GetComponent<p_ship>().Reset();
+                }
+                break;
+        }
+        
+
+       
+    }
 
     public void switchPlayer()
     {
@@ -89,7 +116,7 @@ public class EndTurn : MonoBehaviour
     void Start()
     {
         playerOne = GameObject.FindWithTag("p1");
-        playerTwo = GameObject.FindWithTag("ship 2");
+        playerTwo = GameObject.FindWithTag("p2");
         playerTwo.GetComponent<PlayerController>().enabled = false;
 
         playerConRef = new PlayerController();

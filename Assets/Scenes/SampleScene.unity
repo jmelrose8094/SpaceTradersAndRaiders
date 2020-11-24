@@ -789,13 +789,16 @@ MonoBehaviour:
   numGenerators: 0
   numMissiles: 0
   numAntiMissile: 0
-  numCriticalHits: 0
-  numArmor: 4
   numEngines: 1
   numRepairSys: 0
   numCommandSys: 0
+  numCriticalHits: 0
+  numArmor: 4
   maxComponents: 5
   slotsUsed: 0
+  numAttacksRemaining: 0
+  numRepairsUsed: 0
+  numAssaults: 0
   numSpaceMarines: 0
   numActiveMarines: 0
   numEnemyMarines: 0
@@ -2644,6 +2647,8 @@ GameObject:
   - component: {fileID: 265435890}
   - component: {fileID: 265435891}
   - component: {fileID: 265435892}
+  - component: {fileID: 265435893}
+  - component: {fileID: 265435894}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2665,6 +2670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popUpBox: {fileID: 926595003}
   IF: {fileID: 972244832}
+  clicked: 0
 --- !u!4 &265435889
 Transform:
   m_ObjectHideFlags: 0
@@ -2728,6 +2734,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popUpBox: {fileID: 261576858}
   results: {fileID: 622204084}
+--- !u!114 &265435893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265435887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e39d26e1fe4b443ac4640602ee3e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popUpBox: {fileID: 1524990863}
+  message: {fileID: 807659554}
+--- !u!114 &265435894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265435887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b77d2ed88bd99643a37d134ebaf76a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOneShips: []
+  playerTwoShips: []
 --- !u!1 &288474461
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,7 +3308,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 926595007}
         m_TargetAssemblyTypeName: SpaceMarinePopUp, Assembly-CSharp
-        m_MethodName: Close
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6394,6 +6428,7 @@ RectTransform:
   - {fileID: 636908351}
   - {fileID: 261576859}
   - {fileID: 892940924}
+  - {fileID: 1524990864}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7031,6 +7066,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 718837140}
+        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+        m_MethodName: ResetShips
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &718837138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7107,8 +7154,9 @@ MonoBehaviour:
   vRareMineralsTwo: 20
   mineLevelOne: 1
   mineLevelTwo: 1
-  playerOne: {fileID: 0}
-  playerTwo: {fileID: 0}
+  gameController: {fileID: 265435887}
+  playerOne: {fileID: 761909283}
+  playerTwo: {fileID: 1834418415}
   playerNum: 1
 --- !u!1 &732933515
 GameObject:
@@ -7554,9 +7602,9 @@ MonoBehaviour:
   arrComponents:
   - {fileID: 761909289}
   - {fileID: 761909294}
-  - {fileID: 761909293}
+  - {fileID: 761909299}
   - {fileID: 761909292}
-  - {fileID: 761909290}
+  - {fileID: 761909299}
   marines:
   - {fileID: 761909298}
   - {fileID: 761909298}
@@ -7564,16 +7612,19 @@ MonoBehaviour:
   - {fileID: 761909298}
   enemyMarines: []
   numBeamWeapons: 1
-  numGenerators: 1
+  numGenerators: 0
   numMissiles: 1
-  numAntiMissile: 1
-  numCriticalHits: 4
-  numArmor: 2
+  numAntiMissile: 0
   numEngines: 1
   numRepairSys: 0
-  numCommandSys: 0
+  numCommandSys: 2
+  numCriticalHits: 2
+  numArmor: 5
   maxComponents: 5
   slotsUsed: 5
+  numAttacksRemaining: 20
+  numRepairsUsed: 0
+  numAssaults: 0
   numSpaceMarines: 4
   numActiveMarines: 4
   numEnemyMarines: 0
@@ -7770,6 +7821,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 3
   active: 1
+--- !u!114 &761909299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761909283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72ab46d37e40ea48a71728b59582dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &785518860
 GameObject:
   m_ObjectHideFlags: 0
@@ -7849,6 +7912,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785518860}
   m_CullTransparentMesh: 0
+--- !u!1 &807659553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807659556}
+  - component: {fileID: 807659555}
+  - component: {fileID: 807659554}
+  m_Layer: 5
+  m_Name: ErrMsg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &807659554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807659553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Error!
+--- !u!222 &807659555
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807659553}
+  m_CullTransparentMesh: 0
+--- !u!224 &807659556
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807659553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1524990864}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.6, y: -17.4}
+  m_SizeDelta: {x: 241.0893, y: 61.978867}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &827774725
 GameObject:
   m_ObjectHideFlags: 0
@@ -8327,6 +8469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popUpBox: {fileID: 926595003}
   IF: {fileID: 0}
+  clicked: 0
 --- !u!1 &935881389
 GameObject:
   m_ObjectHideFlags: 0
@@ -9061,7 +9204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7610691916870812403, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
       propertyPath: m_TagString
-      value: ship 2
+      value: p2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 880ea6ef9f760414b9df638b81fe61a0, type: 3}
@@ -10885,13 +11028,16 @@ MonoBehaviour:
   numGenerators: 0
   numMissiles: 0
   numAntiMissile: 0
-  numCriticalHits: 0
-  numArmor: 4
   numEngines: 1
   numRepairSys: 0
   numCommandSys: 0
+  numCriticalHits: 0
+  numArmor: 4
   maxComponents: 5
   slotsUsed: 0
+  numAttacksRemaining: 0
+  numRepairsUsed: 0
+  numAssaults: 0
   numSpaceMarines: 0
   numActiveMarines: 0
   numEnemyMarines: 0
@@ -13770,6 +13916,162 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516387147}
   m_CullTransparentMesh: 0
+--- !u!1 &1524990863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1524990864}
+  - component: {fileID: 1524990866}
+  - component: {fileID: 1524990865}
+  m_Layer: 5
+  m_Name: ErrPopUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1524990864
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524990863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1551410782}
+  - {fileID: 807659556}
+  m_Father: {fileID: 643454162}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2.5862, y: -0.0000083447}
+  m_SizeDelta: {x: 292.96576, y: 156.06082}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1524990865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524990863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1524990866
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524990863}
+  m_CullTransparentMesh: 0
+--- !u!1 &1551410781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1551410782}
+  - component: {fileID: 1551410784}
+  - component: {fileID: 1551410783}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1551410782
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551410781}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1524990864}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 51.4}
+  m_SizeDelta: {x: 160, y: 39.13681}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1551410783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551410781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Error!
+--- !u!222 &1551410784
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551410781}
+  m_CullTransparentMesh: 0
 --- !u!1 &1563305849
 GameObject:
   m_ObjectHideFlags: 0
@@ -14996,13 +15298,16 @@ MonoBehaviour:
   numGenerators: 1
   numMissiles: 1
   numAntiMissile: 1
-  numCriticalHits: 1
-  numArmor: 3
   numEngines: 1
   numRepairSys: 0
   numCommandSys: 0
+  numCriticalHits: 1
+  numArmor: 3
   maxComponents: 5
   slotsUsed: 5
+  numAttacksRemaining: 0
+  numRepairsUsed: 0
+  numAssaults: 0
   numSpaceMarines: 0
   numActiveMarines: 0
   numEnemyMarines: 0
@@ -15332,7 +15637,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945800427}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1945800430
 Camera:
   m_ObjectHideFlags: 0

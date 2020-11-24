@@ -16,21 +16,9 @@ public class p_ship : MonoBehaviour
     public List<Component> arrComponents = new List<Component>();
     public List<spaceMarine> marines = new List<spaceMarine>();
     public List<spaceMarine> enemyMarines = new List<spaceMarine>();
-    public int numBeamWeapons;
-    public int numGenerators;
-    public int numMissiles;
-    public int numAntiMissile;
-    public int numCriticalHits = 0;
-    public int numArmor;
-    public int numEngines;
-    public int numRepairSys;
-    public int numCommandSys;
-    public int maxComponents;
-    public int slotsUsed;
-
-    public int numSpaceMarines;
-    public int numActiveMarines;
-    public int numEnemyMarines;
+    public int numBeamWeapons, numGenerators, numMissiles, numAntiMissile, numEngines, numRepairSys, numCommandSys;
+    public int numCriticalHits, numArmor, maxComponents, slotsUsed, numAttacksRemaining, numRepairsUsed, numAssaults;
+    public int numSpaceMarines, numActiveMarines, numEnemyMarines;
 
     // To Do: add in determine tactical initiative
 
@@ -41,32 +29,84 @@ public class p_ship : MonoBehaviour
         numEnemyMarines = 0;
         GC = GameObject.Find("GameController");
     }
+
+    void Update()
+    {
+        slotsUsed = arrComponents.Count;
+    }
     public p_ship()
     {
         numBeamWeapons = 0;
         numGenerators = 0;
         numMissiles = 0;
         numAntiMissile = 0;
-        numEngines = 1;
+        numEngines = 0;
+        numRepairSys = 0;
+        numCommandSys = 0;
+        numAttacksRemaining = 0;
+        numRepairsUsed = 0;
+        numAssaults = 0;
+        numCriticalHits = 2;
         maxComponents = 5;
         slotsUsed = 0;
-        numArmor = 4;
-
+        numArmor = 5;
     }
 
-    public p_ship(int bw, int g, int m, int am, int e, int mc, int a)
+    public p_ship(int maxComponentSize) //The size of the maxComponentSize variable determines what kind of ship is being created
     {
-        numBeamWeapons = bw;
-        numGenerators = g;
-        numMissiles = m;
-        numAntiMissile = am;
-        numEngines = g;
-        maxComponents = mc;
-        slotsUsed = bw + g + m + am + e;
-        numArmor = a;
+        numBeamWeapons = 0;
+        numGenerators = 0;
+        numMissiles = 0;
+        numAntiMissile = 0;
+        numEngines = 0;
+        numRepairSys = 0;
+        numCommandSys = 0;
+        numAttacksRemaining = 0;
+        numRepairsUsed = 0;
+        numAssaults = 0;
+        slotsUsed = 0;
+
+        
+        if(maxComponentSize <= 5)
+        {
+            maxComponents = 5;
+            numArmor = 5;
+            numCriticalHits = 2;
+        }
+        else if(maxComponentSize <= 10)
+        {
+            maxComponents = 10;
+            numArmor = 10;
+            numCriticalHits = 3;
+        }
+        else if (maxComponentSize <= 15)
+        {
+            maxComponents = 15;
+            numArmor = 15;
+            numCriticalHits = 6;
+        }
+        else if (maxComponentSize <= 20)
+        {
+            maxComponents = 20;
+            numArmor = 20;
+            numCriticalHits = 9;
+        }
+        else if (maxComponentSize <= 25)
+        {
+            maxComponents = 25;
+            numArmor = 25;
+            numCriticalHits = 18;
+        }
+        else
+        {
+            maxComponents = 5;
+            numArmor = 5;
+            numCriticalHits = 2;
+        }
+
     }
 
-    public void RollUIHandler(int roll, int level, string location)
+    private void RollUIHandler(int roll, int level, string location)
     {
         GC.GetComponent<RollPopUp>().PopUp();
 
@@ -196,7 +236,7 @@ public class p_ship : MonoBehaviour
 
     }
 
-    public void DmgAssesmentHandler(p_ship target)
+    private void DmgAssesmentHandler(p_ship target)
     {
         string disabledComponent = "";
 
@@ -214,24 +254,44 @@ public class p_ship : MonoBehaviour
         GC.GetComponent<DamageAssesmentUI>().SetDisabledComponents(disabledComponent);
     }
 
-    public void MarineAssaultAssesmentHandler(string s)
+    private void MarineAssaultAssesmentHandler(string s)
     {
         GC.GetComponent<MarineAssaultAssesment>().PopUp();
         GC.GetComponent<MarineAssaultAssesment>().SetText(s);
     }
 
+    private IEnumerator ErrorBox(string message)
+    {
+        GC.GetComponent<ErrMsgPopUp>().PopUp();
+        GC.GetComponent<ErrMsgPopUp>().SetText(message);
+        yield return new WaitForSeconds(2f);
+        GC.GetComponent<ErrMsgPopUp>().Close();
+    }
+
     // --------------------------------------------------- This ship attacks ship at the target parameter
     public void LaunchAttack(p_ship target)
     {
-        StartCoroutine(Attack(target));
+        if (numAttacksRemaining > 0)
+        {
+            numAttacksRemaining--;
+            StartCoroutine(Attack(target));
+        }
+        else
+            StartCoroutine(ErrorBox("You have used all you attacks for this turn"));
     }
 
     public void LaunchMarineAssault(p_ship target)
     {
-        StartCoroutine(MarineAssault(target));
+        if (numAssaults == 0)
+        {
+            numAssaults++;
+            StartCoroutine(MarineAssault(target));
+        }
+        else
+            StartCoroutine(ErrorBox("You have used all you marine assaults for this turn"));
     }
 
-    public IEnumerator Attack(p_ship target)
+    private IEnumerator Attack(p_ship target)
     {
         int beamHit = 0; // number of beam weapons that need to be calculated against shields
         int missileHit = 0; //number of missiles that need top be calculated against anitmissiles
@@ -440,17 +500,17 @@ public class p_ship : MonoBehaviour
 
     //  -------------------------------------- Space Marine Combat
 
-    public IEnumerator MarineAssault(p_ship target)
+    private IEnumerator MarineAssault(p_ship target)
     {
-        int numMarinesUsed, disadvantage = 0;
+        int disadvantage = 0;
         bool boardSuccessful = false;
-        numMarinesUsed = GetNumAssaultMarines();
+
         disadvantage = HasMoreEngines(target);
 
 
         //Boarding process
         int i = 0;
-        while(i<numMarinesUsed && marines.Count>=1)
+        while(i<numActiveMarines && marines.Count>=1)
         {
             Tuple<bool, int> temp;
             if(marines[i] != null && marines[(i)].GetActivity() == true)
@@ -572,17 +632,16 @@ public class p_ship : MonoBehaviour
 
     public void Repair()
     {
-        int numUsed = 0;
-        while(numUsed <= numRepairSys)
+        while(numRepairsUsed <= numRepairSys)
         {
             RepairComponent();
-            numUsed++;
+            numRepairsUsed++;
         }
     }
 
     // ------------------------------------------- Repairs a single component
 
-    public void RepairComponent()
+    private void RepairComponent()
     {
         for(int i = 0; i<arrComponents.Count; i++)
         {
@@ -596,7 +655,7 @@ public class p_ship : MonoBehaviour
 
     // ---------------------------------------- Rolls dice for marine
 
-    public Tuple<bool, int> MarineRoll(int dis, int i)
+    private Tuple<bool, int> MarineRoll(int dis, int i)
     {
         int roll = UnityEngine.Random.Range(1, 6) + dis;
         if (marines[i].getLevel() >= roll)
@@ -610,7 +669,7 @@ public class p_ship : MonoBehaviour
     }
 
     // ----------------------------------------- Returns how many more engines the target ship has over this ship
-    public int HasMoreEngines(p_ship target)
+    private int HasMoreEngines(p_ship target)
     {
         if(this.GetNumEngine() >= target.GetNumEngine())
         {
@@ -625,24 +684,26 @@ public class p_ship : MonoBehaviour
 
     // ------------------------------------- Ask the player how many marines they want to use in the assault
 
-    public int GetNumAssaultMarines()
-    {
-        // To do: make a function to create a UI to ask the user how many marines that they want to use
-        int num =3;
-        //GameObject.Find("GameController").GetComponent<SpaceMarinePopUp>().PopUp();
+    //public IEnumerator GetNumAssaultMarines()
+    //{
+    //    // To do: make a function to create a UI to ask the user how many marines that they want to use
+    //    int num =3;
+    //    GC.GetComponent<SpaceMarinePopUp>().PopUp();
 
-       // num = int.Parse(GameObject.Find("GameController").GetComponent<SpaceMarinePopUp>().GetText());
-
-       // print("Num Input" + num);
-
+    //    while (!GC.GetComponent<SpaceMarinePopUp>().GetClicked())
+    //    {
+    //        yield return new WaitForSeconds(1f);
+    //    }
         
-        return num;
-    }
+    //    num = int.Parse(GC.GetComponent<SpaceMarinePopUp>().GetText());
+
+    //    numMarinesUsed = num;
+    //}
 
 
     // -------------------------------------------- Get the array of space marines being used in attack and return them
 
-    public spaceMarine[] GetSpaceMarines(int num)
+    private spaceMarine[] GetSpaceMarines(int num)
     {
         spaceMarine[] a = new spaceMarine[num];
 
@@ -657,9 +718,25 @@ public class p_ship : MonoBehaviour
         return a;
     }
 
+    // ------------------------------------------ To be used at the end of a turn to reset the number of attacks and repairs the ship can use
+
+    public void Reset()
+    {
+        numAttacksRemaining = 0;
+        numRepairsUsed = 0;
+        numAssaults = 0;
+        for(int i = 0; i<arrComponents.Count; i++)
+        {
+            if(arrComponents[i] is p_commandSystem && arrComponents[i].getActivity() == true)
+            {
+                numAttacksRemaining++;
+            }
+        }
+    }
+
     // -------------------------------------------- Transfers space marine from this ship to target ship
 
-    public void TransferMarine(spaceMarine m, int i, p_ship target)
+    private void TransferMarine(spaceMarine m, int i, p_ship target)
     {
         print("In Transfer Marine");
         target.AddEnemyMarine(m);
@@ -668,7 +745,6 @@ public class p_ship : MonoBehaviour
         marines.RemoveAt(i);
 
         numSpaceMarines--;
-
 
     }
 
@@ -852,61 +928,101 @@ public class p_ship : MonoBehaviour
     
     // ---------------------------------------- Buy Components
 
+    public void BuyArmor()
+    {
+        numArmor++;
+    }
+
     public void BuyEngine(int level)
     {
-        p_engine e = new p_engine(level);
-        numEngines++;
-        arrComponents.Add(e);
-        print("engine added");
+        if (slotsUsed < maxComponents)
+        {
+            p_engine e = new p_engine(level);
+            numEngines++;
+            arrComponents.Add(e);
+            print("engine added");
+        }
+        else
+            StartCoroutine(ErrorBox("You already have the maximum number of components"));
                 
     }
     public void BuyBeamWep(int level)
     {
-        p_beamWeapon bw = new p_beamWeapon(level);
-        numBeamWeapons++;
-        arrComponents.Add(bw);
-        print("Beam Weapon Added");
+        if(slotsUsed<maxComponents)
+        {
+            p_beamWeapon bw = new p_beamWeapon(level);
+            numBeamWeapons++;
+            arrComponents.Add(bw);
+            print("Beam Weapon Added");
+        }
+        else
+            StartCoroutine(ErrorBox("You already have the maximum number of components"));
+
 
     }
     public void BuyMissileLauncher(int level)
     {
-        p_missileLauncher ml = new p_missileLauncher(level);
-        numMissiles++;
-        arrComponents.Add(ml);
-        print("Missile Launcher Added");
+        if (slotsUsed < maxComponents)
+        {
+            p_missileLauncher ml = new p_missileLauncher(level);
+            numMissiles++;
+            arrComponents.Add(ml);
+            print("Missile Launcher Added");
+        }
+        else
+            StartCoroutine(ErrorBox("You already have the maximum number of components"));
 
     }
     public void BuyAntiMissile(int level)
     {
-        p_antiMissile am = new p_antiMissile(level);
-        numAntiMissile++;
-        arrComponents.Add(am);
-        print("Anti-Missile Added");
+        if (slotsUsed < maxComponents)
+        {
+            p_antiMissile am = new p_antiMissile(level);
+            numAntiMissile++;
+            arrComponents.Add(am);
+            print("Anti-Missile Added");
+        }
+        else
+            StartCoroutine(ErrorBox("You already have the maximum number of components"));
 
     }
     public void BuyShieldGen(int level)
     {
-        p_sheildGenerator sg = new p_sheildGenerator(level);
-        numGenerators++;
-        arrComponents.Add(sg);
-        print("Shield Generator Added");
+        if (slotsUsed < maxComponents)
+        {
+            p_sheildGenerator sg = new p_sheildGenerator(level);
+            numGenerators++;
+            arrComponents.Add(sg);
+            print("Shield Generator Added");
+        }
+        else
+            StartCoroutine(ErrorBox("You already have the maximum number of components"));
 
     }
-    public void BuyCommandSys(int level)
+    public void BuyCommandSys()
     {
-        p_commandSystem cs = new p_commandSystem(level);
-        numCommandSys++;
-        arrComponents.Add(cs);
-        print("Command System Added");
-
+        if (slotsUsed < maxComponents)
+        {
+            p_commandSystem cs = new p_commandSystem();
+            numCommandSys++;
+            arrComponents.Add(cs);
+            print("Command System Added");
+        }
+        else
+            StartCoroutine(ErrorBox("You already have the maximum number of components"));
     }
+
     public void BuyRepairSys(int level)
     {
-        p_repairSystem rs = new p_repairSystem(level);
-        numRepairSys++;
-        arrComponents.Add(rs);
-        print("Repair System Added");
-
+        if (slotsUsed < maxComponents)
+        {
+            p_repairSystem rs = new p_repairSystem(level);
+            numRepairSys++;
+            arrComponents.Add(rs);
+            print("Repair System Added");
+        }
+        else
+            StartCoroutine(ErrorBox("You already have the maximum number of components"));
     }
 }
 
