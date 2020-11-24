@@ -128,71 +128,71 @@ public class EndTurn : MonoBehaviour
     //On end of turn, adds the appropriate amount of minerals
     public void addMineral()
     {
-            if (playerNum == 2 && fazeNum == 1)
+        if (playerNum == 2 && fazeNum == 1)
+        {
+            if (mineLevelOne == 1)
             {
-                if (mineLevelOne == 1)
-                {
-                    commonMineralsOne += (greenSystems * 30)+ 50;
-                    rareMineralsOne += (greenSystems * 20) + (blueSystems * 40) + 30;
-                    vRareMineralsOne += (greenSystems * 10) + (redSystems * 30) + 20;
-                }
-                if (mineLevelOne == 2)
-                {
-                    commonMineralsOne += (greenSystems * 60) + 100;
-                    rareMineralsOne += (greenSystems * 40) + (blueSystems * 80) + 60;
-                    vRareMineralsOne += (greenSystems * 20) + (redSystems * 60) + 40;
-                }
-                if (mineLevelOne == 3)
-                {
-                    commonMineralsOne += (greenSystems * 90) + 150;
-                    rareMineralsOne += (greenSystems * 60) + (blueSystems * 120) + 90;
-                    vRareMineralsOne += (greenSystems * 30) + (redSystems * 80) + 60;
-                }
-                if (mineLevelOne == 4)
-                {
-                    commonMineralsOne += (greenSystems * 120) + 200;
-                    rareMineralsOne += (greenSystems * 80) + (blueSystems * 160) + 120;
-                    vRareMineralsOne += (greenSystems * 40) + (redSystems * 120) + 80;
-                }
-            fazeNum = 0;
+                commonMineralsOne += (greenSystems * 30) + 50;
+                rareMineralsOne += (greenSystems * 20) + (blueSystems * 40) + 30;
+                vRareMineralsOne += (greenSystems * 10) + (redSystems * 30) + 20;
             }
+            if (mineLevelOne == 2)
+            {
+                commonMineralsOne += (greenSystems * 60) + 100;
+                rareMineralsOne += (greenSystems * 40) + (blueSystems * 80) + 60;
+                vRareMineralsOne += (greenSystems * 20) + (redSystems * 60) + 40;
+            }
+            if (mineLevelOne == 3)
+            {
+                commonMineralsOne += (greenSystems * 90) + 150;
+                rareMineralsOne += (greenSystems * 60) + (blueSystems * 120) + 90;
+                vRareMineralsOne += (greenSystems * 30) + (redSystems * 80) + 60;
+            }
+            if (mineLevelOne == 4)
+            {
+                commonMineralsOne += (greenSystems * 120) + 200;
+                rareMineralsOne += (greenSystems * 80) + (blueSystems * 160) + 120;
+                vRareMineralsOne += (greenSystems * 40) + (redSystems * 120) + 80;
+            }
+            fazeNum = 0;
+        }
 
-            if (playerNum == 1 && fazeNum == 2)
-            { 
-                if (mineLevelTwo == 1)
-                {
-                    commonMineralsTwo += (greenSystems * 30) + 50;
-                    rareMineralsTwo += (greenSystems * 20) + (blueSystems * 40) + 30;
-                    vRareMineralsTwo += (greenSystems * 10) + (redSystems * 30) + 20;
-                }
-                if (mineLevelTwo == 2)
-                {
-                    commonMineralsTwo += (greenSystems * 60) + 100;
-                    rareMineralsTwo += (greenSystems * 40) + (blueSystems * 80) + 60;
-                    vRareMineralsTwo += (greenSystems * 20) + (redSystems * 60) + 40;
-                }
-                if (mineLevelTwo == 3)
-                {
-                    commonMineralsTwo += (greenSystems * 90) + 150;
-                    rareMineralsTwo += (greenSystems * 60) + (blueSystems * 120) + 90;
-                    vRareMineralsTwo += (greenSystems * 30) + (redSystems * 80) + 60;
-                }
-                if (mineLevelTwo == 4)
-                {
-                    commonMineralsTwo += (greenSystems * 120) + 200;
-                    rareMineralsTwo += (greenSystems * 80) + (blueSystems * 160) + 120;
-                    vRareMineralsTwo += (greenSystems * 40) + (redSystems * 120) + 80;
-                }
-            fazeNum = 0;
+        if (playerNum == 1 && fazeNum == 2)
+        {
+            if (mineLevelTwo == 1)
+            {
+                commonMineralsTwo += (greenSystems * 30) + 50;
+                rareMineralsTwo += (greenSystems * 20) + (blueSystems * 40) + 30;
+                vRareMineralsTwo += (greenSystems * 10) + (redSystems * 30) + 20;
             }
+            if (mineLevelTwo == 2)
+            {
+                commonMineralsTwo += (greenSystems * 60) + 100;
+                rareMineralsTwo += (greenSystems * 40) + (blueSystems * 80) + 60;
+                vRareMineralsTwo += (greenSystems * 20) + (redSystems * 60) + 40;
+            }
+            if (mineLevelTwo == 3)
+            {
+                commonMineralsTwo += (greenSystems * 90) + 150;
+                rareMineralsTwo += (greenSystems * 60) + (blueSystems * 120) + 90;
+                vRareMineralsTwo += (greenSystems * 30) + (redSystems * 80) + 60;
+            }
+            if (mineLevelTwo == 4)
+            {
+                commonMineralsTwo += (greenSystems * 120) + 200;
+                rareMineralsTwo += (greenSystems * 80) + (blueSystems * 160) + 120;
+                vRareMineralsTwo += (greenSystems * 40) + (redSystems * 120) + 80;
+            }
+            fazeNum = 0;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerNum == 2)
+        if (playerNum == 2)
             addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMines Level: " + mineLevelTwo;
-        else if(playerNum == 1)
+        else if (playerNum == 1)
             addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMines Level: " + mineLevelOne;
 
 
@@ -238,7 +238,7 @@ public class EndTurn : MonoBehaviour
             }
         }
     }
-    
+
     public void BuyEngine()
     {
         if (playerNum == 1)

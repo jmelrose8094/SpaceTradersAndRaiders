@@ -2071,20 +2071,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761909284}
-        m_TargetAssemblyTypeName: p_ship, Assembly-CSharp
-        m_MethodName: BuyAntiMissile
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 718837140}
-        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+      - m_Target: {fileID: 265435894}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BuyAntiMissile
         m_Mode: 1
         m_Arguments:
@@ -2649,9 +2637,10 @@ GameObject:
   - component: {fileID: 265435892}
   - component: {fileID: 265435893}
   - component: {fileID: 265435894}
+  - component: {fileID: 265435895}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2762,6 +2751,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOneShips: []
   playerTwoShips: []
+  activeShip: {fileID: 0}
+  playerTurnNum: 1
+  fazeNum: 1
+  playerOneMineral: {fileID: 265435895}
+  playerTwoMineral: {fileID: 265435895}
+--- !u!114 &265435895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265435887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54f1e4e2e513e146a3f054f5f4437e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addMinText: {fileID: 1297796322}
+  greenSys: {fileID: 2058922975}
+  redSys: {fileID: 628825711}
+  blueSys: {fileID: 584031499}
+  greenSysText: {fileID: 0}
+  redSysText: {fileID: 0}
+  blueSysText: {fileID: 0}
+  greenSystems: 0
+  redSystems: 0
+  blueSystems: 0
+  commonMinerals: 50
+  rareMinerals: 30
+  vRareMinerals: 20
+  mineLevel: 1
+  gameController: {fileID: 0}
 --- !u!1 &288474461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,7 +2865,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 718837140}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
         m_MethodName: UpgradeMiner
         m_Mode: 1
@@ -4580,20 +4601,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761909284}
-        m_TargetAssemblyTypeName: p_ship, Assembly-CSharp
-        m_MethodName: BuyMissileLauncher
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 718837140}
-        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+      - m_Target: {fileID: 265435894}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BuyMissileLaunch
         m_Mode: 1
         m_Arguments:
@@ -5480,20 +5489,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761909284}
-        m_TargetAssemblyTypeName: p_ship, Assembly-CSharp
-        m_MethodName: BuyCommandSys
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 718837140}
-        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+      - m_Target: {fileID: 265435894}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BuyCommandSys
         m_Mode: 1
         m_Arguments:
@@ -6246,20 +6243,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761909284}
-        m_TargetAssemblyTypeName: p_ship, Assembly-CSharp
-        m_MethodName: BuyEngine
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 718837140}
-        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+      - m_Target: {fileID: 265435894}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BuyEngine
         m_Mode: 1
         m_Arguments:
@@ -6731,20 +6716,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761909284}
-        m_TargetAssemblyTypeName: p_ship, Assembly-CSharp
-        m_MethodName: BuyBeamWep
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 718837140}
-        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+      - m_Target: {fileID: 265435894}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BuyBeamWeap
         m_Mode: 1
         m_Arguments:
@@ -7054,8 +7027,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 718837140}
-        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+      - m_Target: {fileID: 265435894}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: addMineral
         m_Mode: 1
         m_Arguments:
@@ -8706,20 +8679,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761909284}
-        m_TargetAssemblyTypeName: p_ship, Assembly-CSharp
-        m_MethodName: BuyShieldGen
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 718837140}
-        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+      - m_Target: {fileID: 265435894}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BuyShieldGen
         m_Mode: 1
         m_Arguments:
@@ -14545,20 +14506,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761909284}
-        m_TargetAssemblyTypeName: p_ship, Assembly-CSharp
-        m_MethodName: BuyRepairSys
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 718837140}
-        m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
+      - m_Target: {fileID: 265435894}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BuyRepairSys
         m_Mode: 1
         m_Arguments:
