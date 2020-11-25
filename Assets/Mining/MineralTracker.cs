@@ -38,6 +38,19 @@ public class MineralTracker : MonoBehaviour
         addMinText.text = "Common Minerals: " + commonMinerals + "\nRare Minerals: " + rareMinerals + "\nVery Rare Minerals: " + vRareMinerals + "\nMines Level: " + mineLevel;
     }
 
+    public void BuyShip()
+    {
+        //GameObject prefab = new GameObject("humanFrigate");
+
+        //int shipNum = 1;
+        //switch (shipNum)
+        //{
+        //    case 1:
+        //        Instantiate(prefab, new Vector3(1f, 1f, 0f), Quaternion.identity);
+        //        break;
+        //}
+    }
+
     public void addMineral()
     {
         if (mineLevel == 1)

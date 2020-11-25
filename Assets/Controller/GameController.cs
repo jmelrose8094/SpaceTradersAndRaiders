@@ -124,6 +124,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void BuyShip()
+    {
+        playerOneMineral.BuyShip();
+    }
+
     public void BuyEngine()
     {
         switch (playerTurnNum)
