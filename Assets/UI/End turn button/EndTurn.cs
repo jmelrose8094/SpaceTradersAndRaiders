@@ -36,6 +36,7 @@ public class EndTurn : MonoBehaviour
     // Invokes the reset function in the p_ship class for all of a single players ships
     public void ResetShips()
     {
+        gameController.GetComponent<GameController>().RecompileList();
         List<GameObject> temp1 = gameController.GetComponent<GameController>().GetPlayerOneShips();
         List<GameObject> temp2 = gameController.GetComponent<GameController>().GetPlayerTwoShips();
 
@@ -64,18 +65,19 @@ public class EndTurn : MonoBehaviour
         switch (playerNum)
         {
             case 2:
-                playerOne.GetComponent<PlayerController>().enabled = true;
-                playerTwo.GetComponent<PlayerController>().enabled = false;
+                //playerOne.GetComponent<PlayerController>().enabled = true;
+                //playerTwo.GetComponent<PlayerController>().enabled = false;
                 playerNum = 1;
                 turnText.text = "P" + playerNum + "'s Turn";
                 break;
             case 1:
-                playerTwo.GetComponent<PlayerController>().enabled = true;
-                playerOne.GetComponent<PlayerController>().enabled = false;
+                //playerTwo.GetComponent<PlayerController>().enabled = true;
+                //playerOne.GetComponent<PlayerController>().enabled = false;
                 playerNum = 2;
                 turnText.text = "P" + playerNum + "'s Turn";
                 break;
         }
+        gameController.GetComponent<GameController>().SwitchTurns();
     }
 
 

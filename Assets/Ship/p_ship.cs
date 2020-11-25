@@ -12,7 +12,7 @@ using UnityEngine;
 public class p_ship : MonoBehaviour
 {
     public int owner = 1;
-    public GameObject GC;
+    public GameObject GC, shipObject;
     public List<Component> arrComponents = new List<Component>();
     public List<spaceMarine> marines = new List<spaceMarine>();
     public List<spaceMarine> enemyMarines = new List<spaceMarine>();
@@ -24,6 +24,8 @@ public class p_ship : MonoBehaviour
 
     void Start()
     {
+        shipObject = gameObject;
+        print(gameObject.tag);
         numSpaceMarines = marines.Count;
         numActiveMarines = numSpaceMarines;
         numEnemyMarines = 0;
@@ -33,6 +35,11 @@ public class p_ship : MonoBehaviour
     void Update()
     {
         slotsUsed = arrComponents.Count;
+    }
+
+    void OnMouseDown()
+    {
+        GC.GetComponent<GameController>().SetActiveShip(shipObject);
     }
     public p_ship()
     {
@@ -490,8 +497,11 @@ public class p_ship : MonoBehaviour
 
         if (target.numCriticalHits <= 0)
         {
-            Destroy(target);
-            Destroy(GameObject.FindGameObjectWithTag("ship 2"));
+            DmgAssesmentHandler(target);
+            yield return new WaitForSeconds(5f);
+            GC.GetComponent<DamageAssesmentUI>().Close();
+            Destroy(target.gameObject);
+            GC.GetComponent<GameController>().RecompileList();
             print("Target Destroyed");
         }
 
@@ -614,6 +624,8 @@ public class p_ship : MonoBehaviour
             MarineAssaultAssesmentHandler("Enemy ship was captured!");
             yield return new WaitForSeconds(5f);
             GC.GetComponent<MarineAssaultAssesment>().Close();
+            target.gameObject.tag = this.gameObject.tag;
+            GC.GetComponent<GameController>().RecompileList();
             print("Ship Captured");
         }
         else
