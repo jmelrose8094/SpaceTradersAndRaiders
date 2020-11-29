@@ -23,6 +23,11 @@ public class PlayerController : MonoBehaviour
         movePoint.parent = null;
         //orgPoint.position = movePoint.position;
   }
+
+  public void setSeleted()
+  {
+    isSelected = true;
+  }
   
   
   void Update()
