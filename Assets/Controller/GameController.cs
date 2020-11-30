@@ -32,20 +32,11 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        playerTurnNum = GetComponent<EndTurn>().turnNum;
+        fazeNum = GetComponent<EndTurn>().fazeNum;
         activeShip.GetComponent<PlayerController>().enabled = true;
         previousShip.GetComponent<PlayerController>().enabled = false;
 
-
-
-        //    if(playerTurnNum == 1)
-        //    {
-        //        playerOneMineral.UpdateText();
-        //    }
-        //    else if(playerTurnNum == 2)
-        //    {
-        //        playerTwoMineral.UpdateText();
-        //    }
     }
 
     public void SwitchTurns()
@@ -103,10 +94,10 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.addMineral();
+                playerOneMineral.addMineral(0);
                 break;
             case 2:
-                playerTwoMineral.addMineral();
+                playerTwoMineral.addMineral(1);
                 break;
         }
     }
@@ -116,10 +107,10 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.UpgradeMiner();
+                playerOneMineral.UpgradeMiner(0);
                 break;
             case 2:
-                playerTwoMineral.UpgradeMiner();
+                playerTwoMineral.UpgradeMiner(1);
                 break;
         }
     }
@@ -134,10 +125,10 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.BuyEngine();
+                playerOneMineral.BuyEngine(0);
                 break;
             case 2:
-                playerTwoMineral.BuyEngine();
+                playerTwoMineral.BuyEngine(1);
                 break;
         }
     }
@@ -147,10 +138,10 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.BuyShieldGen();
+                playerOneMineral.BuyShieldGen(0);
                 break;
             case 2:
-                playerTwoMineral.BuyShieldGen();
+                playerTwoMineral.BuyShieldGen(1);
                 break;
         }
     }
@@ -160,10 +151,10 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.BuyRepairSys();
+                playerOneMineral.BuyRepairSys(0);
                 break;
             case 2:
-                playerTwoMineral.BuyRepairSys();
+                playerTwoMineral.BuyRepairSys(1);
                 break;
         }
     }
@@ -173,10 +164,10 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.BuyCommandSys();
+                playerOneMineral.BuyCommandSys(0);
                 break;
             case 2:
-                playerTwoMineral.BuyCommandSys();
+                playerTwoMineral.BuyCommandSys(1);
                 break;
         }
     }
@@ -186,10 +177,10 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.BuyMissileLaunch();
+                playerOneMineral.BuyMissileLaunch(0);
                 break;
             case 2:
-                playerTwoMineral.BuyMissileLaunch();
+                playerTwoMineral.BuyMissileLaunch(1);
                 break;
         }
     }
@@ -199,10 +190,10 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.BuyAntiMissile();
+                playerOneMineral.BuyAntiMissile(0);
                 break;
             case 2:
-                playerTwoMineral.BuyAntiMissile();
+                playerTwoMineral.BuyAntiMissile(1);
                 break;
         }
     }
@@ -212,17 +203,14 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.BuyBeamWeap();
+                playerOneMineral.BuyBeamWeap(0);
                 break;
             case 2:
-                playerTwoMineral.BuyBeamWeap();
+                playerTwoMineral.BuyBeamWeap(1);
                 break;
         }
     }
-    public int GetPlayerTurnNum()
-    {
-        return playerTurnNum;
-    }
+   
 
     public int GetTurnFaze()
     {

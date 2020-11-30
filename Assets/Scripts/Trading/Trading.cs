@@ -9,26 +9,26 @@ public class Trading : MonoBehaviour
 
     public UnityEngine.UI.Text pOneMins, pTwoMins;
     public int comOne, comTwo, rareOne, rareTwo, vRareOne, vRareTwo;
-    public GameObject retrieval;
+    public MineralTracker retrieval;
     public Text minCount;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        retrieval = GameObject.FindGameObjectWithTag("End Turn");
+        comOne = retrieval.GetComponent<MineralTracker>().commonMinerals[0];
     }
 
     // Update is called once per frame
     void Update()
     {
         //Retrieves current mineral count
-        comOne = retrieval.GetComponent<EndTurn>().commonMineralsOne;
-        comTwo = retrieval.GetComponent<EndTurn>().commonMineralsTwo;
-        rareOne = retrieval.GetComponent<EndTurn>().rareMineralsOne;
-        rareTwo = retrieval.GetComponent<EndTurn>().rareMineralsTwo;
-        vRareOne = retrieval.GetComponent<EndTurn>().vRareMineralsOne;
-        vRareTwo = retrieval.GetComponent<EndTurn>().vRareMineralsTwo;
+        comOne = retrieval.GetComponent<MineralTracker>().commonMinerals[0];
+        comTwo = retrieval.GetComponent<MineralTracker>().commonMinerals[1];
+        rareOne = retrieval.GetComponent<MineralTracker>().rareMinerals[0];
+        rareTwo = retrieval.GetComponent<MineralTracker>().rareMinerals[1];
+        vRareOne = retrieval.GetComponent<MineralTracker>().vRareMinerals[0];
+        vRareTwo = retrieval.GetComponent<MineralTracker>().vRareMinerals[1];
 
         //Updates trading textbox
         pOneMins.text = "Common Minerals: " + comOne + "\nRare Minerals: " + rareOne + "\nVery Rare Minerals: " + vRareOne;
@@ -62,8 +62,8 @@ public class Trading : MonoBehaviour
         //Trading of minerals
         if (comOnePut <= comOne)
         {
-            retrieval.GetComponent<EndTurn>().commonMineralsOne -= comOnePut;
-            retrieval.GetComponent<EndTurn>().commonMineralsTwo += comOnePut;
+            retrieval.GetComponent<MineralTracker>().commonMinerals[0] -= comOnePut;
+            retrieval.GetComponent<MineralTracker>().commonMinerals[1] += comOnePut;
         }
         else
         {
@@ -73,8 +73,8 @@ public class Trading : MonoBehaviour
 
         if (comTwoPut <= comTwo)
         {
-            retrieval.GetComponent<EndTurn>().commonMineralsTwo -= comTwoPut;
-            retrieval.GetComponent<EndTurn>().commonMineralsOne += comTwoPut;
+            retrieval.GetComponent<MineralTracker>().commonMinerals[1] -= comTwoPut;
+            retrieval.GetComponent<MineralTracker>().commonMinerals[0] += comTwoPut;
         }
         else
         {
@@ -84,8 +84,8 @@ public class Trading : MonoBehaviour
 
         if (rareOnePut <= rareOne)
         {
-            retrieval.GetComponent<EndTurn>().rareMineralsOne -= rareOnePut;
-            retrieval.GetComponent<EndTurn>().rareMineralsTwo += rareOnePut;
+            retrieval.GetComponent<MineralTracker>().rareMinerals[0] -= rareOnePut;
+            retrieval.GetComponent<MineralTracker>().rareMinerals[1] += rareOnePut;
         }
         else
         {
@@ -95,8 +95,8 @@ public class Trading : MonoBehaviour
 
         if (rareTwoPut <= rareTwo)
         {
-            retrieval.GetComponent<EndTurn>().rareMineralsTwo -= rareTwoPut;
-            retrieval.GetComponent<EndTurn>().rareMineralsOne += rareTwoPut;
+            retrieval.GetComponent<MineralTracker>().rareMinerals[1] -= rareTwoPut;
+            retrieval.GetComponent<MineralTracker>().rareMinerals[0] += rareTwoPut;
         }
         else
         {
@@ -106,8 +106,8 @@ public class Trading : MonoBehaviour
 
         if (vRareOnePut <= vRareOne)
         {
-            retrieval.GetComponent<EndTurn>().vRareMineralsOne -= vRareOnePut;
-            retrieval.GetComponent<EndTurn>().vRareMineralsTwo += vRareOnePut;
+            retrieval.GetComponent<MineralTracker>().vRareMinerals[0] -= vRareOnePut;
+            retrieval.GetComponent<MineralTracker>().vRareMinerals[1] += vRareOnePut;
         }
         else
         {
@@ -117,8 +117,8 @@ public class Trading : MonoBehaviour
 
         if (vRareTwoPut <= vRareTwo)
         {
-            retrieval.GetComponent<EndTurn>().vRareMineralsTwo -= vRareTwoPut;
-            retrieval.GetComponent<EndTurn>().vRareMineralsOne += vRareTwoPut;
+            retrieval.GetComponent<MineralTracker>().vRareMinerals[1] -= vRareTwoPut;
+            retrieval.GetComponent<MineralTracker>().vRareMinerals[0] += vRareTwoPut;
         }
         else
         {
