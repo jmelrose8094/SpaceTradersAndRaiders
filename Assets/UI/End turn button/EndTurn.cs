@@ -128,7 +128,7 @@ public class EndTurn : MonoBehaviour
         
     }
     //On end of turn, adds the appropriate amount of minerals
-    public void addMineral()
+    /*public void addMineral()
     {
         if (playerNum == 2 && fazeNum == 1)
         {
@@ -188,11 +188,11 @@ public class EndTurn : MonoBehaviour
             fazeNum = 0;
         }
     }
-
+    */
     // Update is called once per frame
     void Update()
     {
-        if (playerNum == 2)
+       /* if (playerNum == 2)
             addMinText.text = "Common Minerals: " + commonMineralsTwo + "\nRare Minerals: " + rareMineralsTwo + "\nVery Rare Minerals: " + vRareMineralsTwo + "\nMines Level: " + mineLevelTwo;
         else if (playerNum == 1)
             addMinText.text = "Common Minerals: " + commonMineralsOne + "\nRare Minerals: " + rareMineralsOne + "\nVery Rare Minerals: " + vRareMineralsOne + "\nMines Level: " + mineLevelOne;
@@ -212,11 +212,11 @@ public class EndTurn : MonoBehaviour
         redSystems = int.Parse(redSysText.text);
         blueSysText = blueSys.GetComponent<Text>();
         blueSystems = int.Parse(blueSysText.text);
-
+        */
     }
+    
 
-
-
+/*
     public void UpgradeMiner()
     {
         if (playerNum == 1 && mineLevelOne < 4)
@@ -383,5 +383,5 @@ public class EndTurn : MonoBehaviour
                 vRareMineralsTwo -= 10;
             }
         }
-    }
+    }*/
 }
