@@ -15,6 +15,7 @@ TagManager:
   - RareMinTwo
   - VRareMinOne
   - VRareMinTwo
+  - FrigateStats
   layers:
   - Default
   - TransparentFX
