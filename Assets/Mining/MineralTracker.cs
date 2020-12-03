@@ -11,11 +11,8 @@ public class MineralTracker : MonoBehaviour
 
     public Text greenSysText, redSysText, blueSysText;
     public int greenSystems, redSystems, blueSystems, turn;
-    //public int[] playerOneMineral, playerTwoMineral;
     public EndTurn playerTurn;
     public int[] commonMinerals, rareMinerals, vRareMinerals, mineLevel;
-    //public int mineLevel = 1;
-
     public GameController gameController;
 
     void Start()
@@ -40,7 +37,7 @@ public class MineralTracker : MonoBehaviour
         blueSystems = int.Parse(blueSysText.text);
 
         turn = playerTurn.GetComponent<EndTurn>().playerNum;
-        addMinText.text = "Common Minerals: " + commonMinerals[turn - 1] + "\nRare Minerals: " + rareMinerals[turn - 1] + "\nVery Rare Minerals: " + vRareMinerals[turn - 1] + "\nMines Level: " + mineLevel[turn - 1];
+        addMinText.text = "    " + commonMinerals[turn - 1] + "\n    " + rareMinerals[turn - 1] + "\n    " + vRareMinerals[turn - 1] + "\nMines Level: " + mineLevel[turn - 1];
     }
 
    

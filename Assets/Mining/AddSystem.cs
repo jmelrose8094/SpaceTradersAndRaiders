@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AddSystem : MonoBehaviour
 {
     public UnityEngine.UI.Text sysNum;
-    public int playerOneSys = 0, playerTwoSys = 0, pTurn = 1, mineLevel, belongsTo;
+    public int playerOneSys = 0, playerTwoSys = 0, pTurn = 1, minerLevel = 0, belongsTo;
     public GameObject turnOrder, pOneMine, pTwoMine;
     public GameObject[] oneMines, twoMines;
 
@@ -48,17 +48,17 @@ public class AddSystem : MonoBehaviour
     public void Update()
     {
         pTurn = turnOrder.GetComponent<EndTurn>().playerNum;
-        mineLevel = mineLvl.GetComponent<MineralTracker>().mineLevel[pTurn - 1];
+        minerLevel = mineLvl.GetComponent<MineralTracker>().mineLevel[pTurn - 1];
 
-        if (belongsTo == 1)
+        if (belongsTo == 1 && pTurn == 1)
         {
-            oneMines[mineLevel - 1].SetActive(true);
-            twoMines[mineLevel - 1].SetActive(false);
+            oneMines[minerLevel - 1].SetActive(true);
+            twoMines[minerLevel - 1].SetActive(false);
         }
-        else if (belongsTo == 2)
+        else if (belongsTo == 2 && pTurn == 2)
         {
-            twoMines[mineLevel - 1].SetActive(true);
-            oneMines[mineLevel - 1].SetActive(false);
+            twoMines[minerLevel - 1].SetActive(true);
+            oneMines[minerLevel - 1].SetActive(false);
         }
 
         if (pTurn == 1)

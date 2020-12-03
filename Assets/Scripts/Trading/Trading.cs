@@ -31,8 +31,8 @@ public class Trading : MonoBehaviour
         vRareTwo = retrieval.GetComponent<MineralTracker>().vRareMinerals[1];
 
         //Updates trading textbox
-        pOneMins.text = "Common Minerals: " + comOne + "\nRare Minerals: " + rareOne + "\nVery Rare Minerals: " + vRareOne;
-        pTwoMins.text = "Common Minerals: " + comTwo + "\nRare Minerals: " + rareTwo + "\nVery Rare Minerals: " + vRareTwo;
+        pOneMins.text = "" + comOne + "\n" + rareOne + "\n" + vRareOne;
+        pTwoMins.text = "" + comTwo + "\n" + rareTwo + "\n" + vRareTwo;
     }
 
 
