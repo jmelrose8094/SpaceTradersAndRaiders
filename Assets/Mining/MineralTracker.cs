@@ -23,7 +23,7 @@ public class MineralTracker : MonoBehaviour
         commonMinerals = new int[] {50, 50};
         rareMinerals = new int[] {30, 30};
         vRareMinerals = new int[] {20, 20};
-        mineLevel = new int[] { 1, 1};
+        mineLevel = new int[] {1, 1};
 
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }

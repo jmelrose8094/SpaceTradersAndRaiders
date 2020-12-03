@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -9,10 +10,15 @@ public class GameController : MonoBehaviour
 
     public GameObject activeShip, activeTarget, previousShip;
 
-    public int playerTurnNum, fazeNum;
+    public int playerTurnNum, fazeNum, mineLvl;
+
+    public EndTurn pTurn, fNum;
+
+    
 
     public MineralTracker playerOneMineral;
     public MineralTracker playerTwoMineral;
+    public MineralTracker miningStn;
 
 
     void Start()
@@ -32,11 +38,13 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerTurnNum = GetComponent<EndTurn>().turnNum;
-        fazeNum = GetComponent<EndTurn>().fazeNum;
+        playerTurnNum = pTurn.GetComponent<EndTurn>().playerNum;
+        fazeNum = fNum.GetComponent<EndTurn>().fazeNum;
+
         activeShip.GetComponent<PlayerController>().enabled = true;
         previousShip.GetComponent<PlayerController>().enabled = false;
 
+        mineLvl = miningStn.GetComponent<MineralTracker>().mineLevel[playerTurnNum - 1];
     }
 
     public void SwitchTurns()
@@ -107,7 +115,7 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                playerOneMineral.UpgradeMiner(0);
+                playerOneMineral.UpgradeMiner(0);               
                 break;
             case 2:
                 playerTwoMineral.UpgradeMiner(1);
