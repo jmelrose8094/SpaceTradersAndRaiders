@@ -24,6 +24,7 @@ public class p_ship : MonoBehaviour
 
     void Start()
     {
+        arrComponents.Clear();
         shipObject = gameObject;
         print(gameObject.tag);
         numSpaceMarines = marines.Count;
