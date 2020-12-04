@@ -1,0 +1,589 @@
+fileFormatVersion: 2
+guid: 3b7871f9b05a641bfa425a05e7013c40
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7002580485808290616
+    second: Galaxy 3_0
+  - first:
+      213: 1656739233564662401
+    second: Galaxy 3_1
+  - first:
+      213: 611531905188105200
+    second: Galaxy 3_2
+  - first:
+      213: -1002217161702040281
+    second: Galaxy 3_3
+  - first:
+      213: -5567614266687340097
+    second: Galaxy 3_4
+  - first:
+      213: -4792034871963718458
+    second: Galaxy 3_5
+  - first:
+      213: -6654560844717198812
+    second: Galaxy 3_6
+  - first:
+      213: -561334404921840913
+    second: Galaxy 3_7
+  - first:
+      213: 8446028321054260799
+    second: Galaxy 3_8
+  - first:
+      213: -3236655240067257945
+    second: Galaxy 3_9
+  - first:
+      213: -4402359549058529515
+    second: Galaxy 3_10
+  - first:
+      213: -7661327243377969902
+    second: Galaxy 3_11
+  - first:
+      213: -6711728589061300789
+    second: Galaxy 3_12
+  - first:
+      213: -6789488741736753250
+    second: Galaxy 3_13
+  - first:
+      213: -2187585655025604750
+    second: Galaxy 3_14
+  - first:
+      213: 3183320526239107966
+    second: Galaxy 3_15
+  - first:
+      213: 5187321849777718995
+    second: Galaxy 3_16
+  - first:
+      213: -1919408924966043806
+    second: Galaxy 3_17
+  - first:
+      213: -3352129980666667125
+    second: Galaxy 3_18
+  - first:
+      213: -2161950348421674314
+    second: Galaxy 3_19
+  - first:
+      213: -3809592523202649219
+    second: Galaxy 3_20
+  - first:
+      213: -7012555583338488809
+    second: Galaxy 3_21
+  - first:
+      213: -5294688176680712488
+    second: Galaxy 3_22
+  - first:
+      213: 466289299996469287
+    second: Galaxy 3_23
+  - first:
+      213: -2395781429236586148
+    second: Galaxy 3_24
+  - first:
+      213: -1951761258721309260
+    second: Galaxy 3_25
+  - first:
+      213: 5406240085698505094
+    second: Galaxy 3_26
+  - first:
+      213: 250786817499397622
+    second: Galaxy 3_27
+  - first:
+      213: -455228672843555213
+    second: Galaxy 3_28
+  - first:
+      213: -3943043016887079865
+    second: Galaxy 3_29
+  - first:
+      213: 9044352011950242018
+    second: Galaxy 3_30
+  - first:
+      213: 4460730474615841735
+    second: Galaxy 3_31
+  - first:
+      213: -3270054032875731663
+    second: Galaxy 3_32
+  - first:
+      213: 5912315257957793333
+    second: Galaxy 3_33
+  - first:
+      213: -1348446059261929903
+    second: Galaxy 3_34
+  - first:
+      213: 2969504324320556924
+    second: Galaxy 3_35
+  - first:
+      213: 2820293728407666719
+    second: Galaxy 3_36
+  - first:
+      213: 3508905621730131027
+    second: Galaxy 3_37
+  - first:
+      213: 5046872429443353853
+    second: Galaxy 3_38
+  - first:
+      213: -3647179692957563585
+    second: Galaxy 3_39
+  - first:
+      213: -3889223780116645414
+    second: Galaxy 3_40
+  - first:
+      213: -7856894836378052184
+    second: Galaxy 3_41
+  - first:
+      213: -8769342852694261259
+    second: Galaxy 3_42
+  - first:
+      213: -2167941728552120572
+    second: Galaxy 3_43
+  - first:
+      213: -3876192524637896762
+    second: Galaxy 3_44
+  - first:
+      213: 2841683421770514236
+    second: Galaxy 3_45
+  - first:
+      213: -2015226585473810645
+    second: Galaxy 3_46
+  - first:
+      213: 8291027334966347328
+    second: Galaxy 3_47
+  - first:
+      213: -3569835055519645731
+    second: Galaxy 3_48
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Galaxy 3_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c480504626d1de90800000000000000
+      internalID: -7002580485808290616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18a131e1e8bedf610800000000000000
+      internalID: 1656739233564662401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fb0e8917099c7800800000000000000
+      internalID: 611531905188105200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72d13f82dc86712f0800000000000000
+      internalID: -1002217161702040281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb144bba25cdbb2b0800000000000000
+      internalID: -5567614266687340097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_5
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 120
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cc61595ca54f7db0800000000000000
+      internalID: -4792034871963718458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 120
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 422786a4b2046a3a0800000000000000
+      internalID: -6654560844717198812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_7
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 120
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feaad62355db538f0800000000000000
+      internalID: -561334404921840913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 60
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3ef35f4202563570800000000000000
+      internalID: 8446028321054260799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_9
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 60
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a9626b25371513d0800000000000000
+      internalID: -3236655240067257945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_10
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 60
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51741d8905da7e2c0800000000000000
+      internalID: -4402359549058529515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_11
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 60
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 215fe6ea67f7da590800000000000000
+      internalID: -7661327243377969902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcdda2498662bd2a0800000000000000
+      internalID: -6711728589061300789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_13
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e97544e26f3e6c1a0800000000000000
+      internalID: -6789488741736753250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_14
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2776574ef6224a1e0800000000000000
+      internalID: -2187585655025604750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galaxy 3_15
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7b01b4172d6d2c20800000000000000
+      internalID: 3183320526239107966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
