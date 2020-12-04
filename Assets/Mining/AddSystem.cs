@@ -7,7 +7,7 @@ public class AddSystem : MonoBehaviour
 {
     public UnityEngine.UI.Text sysNum;
     public int playerOneSys = 0, playerTwoSys = 0, pTurn = 1, minerLevel = 0, belongsTo;
-    public GameObject turnOrder, pOneMine, pTwoMine;
+    public GameObject turnOrder, pOneMine, pTwoMine, pOneFlag, pTwoFlag;
     public GameObject[] oneMines, twoMines;
 
     public MineralTracker mineLvl;
@@ -36,11 +36,13 @@ public class AddSystem : MonoBehaviour
         if (pTurn == 1)
         {
             pOneMine.SetActive(true);
+            pOneFlag.SetActive(true);
             belongsTo = 1;
         }
         else if (pTurn == 2)
         {
             pTwoMine.SetActive(true);
+            pTwoFlag.SetActive(true);
             belongsTo = 2;
         }
     }
