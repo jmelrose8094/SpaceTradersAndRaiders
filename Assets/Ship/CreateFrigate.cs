@@ -17,32 +17,33 @@ public class CreateFrigate : MonoBehaviour//: p_ship
     public void Start()
     {
 
-        GameObject shipPrefab = Resources.Load("Prefab/p_ship_Cruiser") as GameObject;
-        /*p_ship frigate = new p_ship(numComponents);
+        /*/GameObject shipPrefab = Resources.Load("Prefab/p_ship_Cruiser") as GameObject;
+        p_ship frigate = new p_ship(numComponents);
         //frigate.shipObject
         GameObject a = Instantiate(shipPrefab) as GameObject;
         //GameObject a = Resources.Load("Prefab/p_ship_Cruiser") as GameObject;
         a.transform.position = new Vector3(-0.507f, 2.51f, -3);
-        //frigate.shipObject = a;//*/
+        frigate.shipObject = a;//*/
     }
     public void OnClick()
     {
         p_ship frigate = new p_ship(numComponents);
         //frigate.shipObject
+        GameObject a = Instantiate(shipPrefab) as GameObject;
        // GameObject a = new GameObject p_ship(numComponents);//) as GameObject;
         //GameObject a = Resources.Load("Prefab/p_ship_Cruiser") as GameObject;
-        frigate.transform.position = new Vector3(-0.507f, 2.51f, -3);
-        //frigate.shipObject = a;
-    }
+        a.transform.position = new Vector3(-0.507f, 2.51f, -3);
+        frigate.shipObject = a;
+    }//*/
 
     /*public CreateFrigate()
     {
-        p_ship frigate = new p_ship(numComponents);
+        //p_ship frigate = new p_ship(numComponents);
         //frigate.shipObject
         GameObject a = Instantiate(shipPrefab) as GameObject;
         //GameObject a = Resources.Load("Prefab/p_ship_Cruiser") as GameObject;
         a.transform.position = new Vector2(-0.507f, 2.51f);
-        frigate.shipObject = a;
+        //frigate.shipObject = a;
     }//*/
 
     /*public void create()
