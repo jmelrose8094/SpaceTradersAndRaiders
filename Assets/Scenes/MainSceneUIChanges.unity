@@ -1914,6 +1914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: 1
   GC: {fileID: 0}
+  shipObject: {fileID: 0}
   arrComponents: []
   marines: []
   enemyMarines: []
@@ -1921,13 +1922,16 @@ MonoBehaviour:
   numGenerators: 0
   numMissiles: 0
   numAntiMissile: 0
-  numCriticalHits: 0
-  numArmor: 4
   numEngines: 1
   numRepairSys: 0
   numCommandSys: 0
+  numCriticalHits: 0
+  numArmor: 4
   maxComponents: 5
   slotsUsed: 0
+  numAttacksRemaining: 0
+  numRepairsUsed: 0
+  numAssaults: 0
   numSpaceMarines: 0
   numActiveMarines: 0
   numEnemyMarines: 0
@@ -3193,9 +3197,14 @@ MonoBehaviour:
   playerOneSys: 0
   playerTwoSys: 0
   pTurn: 1
+  minerLevel: 0
+  belongsTo: 0
   turnOrder: {fileID: 0}
   pOneMine: {fileID: 1319984807}
   pTwoMine: {fileID: 1183914383}
+  oneMines: []
+  twoMines: []
+  mineLvl: {fileID: 0}
 --- !u!1 &196968365
 GameObject:
   m_ObjectHideFlags: 0
@@ -4474,6 +4483,8 @@ GameObject:
   - component: {fileID: 265435890}
   - component: {fileID: 265435891}
   - component: {fileID: 265435892}
+  - component: {fileID: 265435894}
+  - component: {fileID: 265435893}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -4495,6 +4506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popUpBox: {fileID: 926595003}
   IF: {fileID: 972244832}
+  clicked: 0
 --- !u!4 &265435889
 Transform:
   m_ObjectHideFlags: 0
@@ -4558,6 +4570,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popUpBox: {fileID: 261576858}
   results: {fileID: 622204084}
+--- !u!114 &265435893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265435887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b77d2ed88bd99643a37d134ebaf76a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOneShips: []
+  playerTwoShips: []
+  activeShip: {fileID: 761909283}
+  activeTarget: {fileID: 1834418415}
+  previousShip: {fileID: 1834418415}
+  playerTurnNum: 1
+  fazeNum: 1
+  mineLvl: 1
+  pTurn: {fileID: 718837140}
+  fNum: {fileID: 718837140}
+  playerOneMineral: {fileID: 265435894}
+  playerTwoMineral: {fileID: 265435894}
+  miningStn: {fileID: 265435894}
+--- !u!114 &265435894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265435887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54f1e4e2e513e146a3f054f5f4437e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addMinText: {fileID: 1297796322}
+  greenSys: {fileID: 348919856}
+  redSys: {fileID: 1374896302}
+  blueSys: {fileID: 196105044}
+  greenSysText: {fileID: 2058922978}
+  redSysText: {fileID: 628825713}
+  blueSysText: {fileID: 584031502}
+  greenSystems: 1
+  redSystems: 1
+  blueSystems: 1
+  turn: 1
+  playerTurn: {fileID: 718837140}
+  commonMinerals: 
+  rareMinerals: 
+  vRareMinerals: 
+  mineLevel: 
+  gameController: {fileID: 265435893}
 --- !u!1 &288474461
 GameObject:
   m_ObjectHideFlags: 0
@@ -5861,9 +5927,14 @@ MonoBehaviour:
   playerOneSys: 0
   playerTwoSys: 0
   pTurn: 1
+  minerLevel: 0
+  belongsTo: 0
   turnOrder: {fileID: 0}
   pOneMine: {fileID: 547864036}
   pTwoMine: {fileID: 2010732668}
+  oneMines: []
+  twoMines: []
+  mineLvl: {fileID: 0}
 --- !u!1 &351785713
 GameObject:
   m_ObjectHideFlags: 0
@@ -8552,9 +8623,14 @@ MonoBehaviour:
   playerOneSys: 0
   playerTwoSys: 0
   pTurn: 1
+  minerLevel: 0
+  belongsTo: 0
   turnOrder: {fileID: 0}
   pOneMine: {fileID: 0}
   pTwoMine: {fileID: 0}
+  oneMines: []
+  twoMines: []
+  mineLvl: {fileID: 0}
 --- !u!114 &584031502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8958,9 +9034,14 @@ MonoBehaviour:
   playerOneSys: 0
   playerTwoSys: 0
   pTurn: 1
+  minerLevel: 0
+  belongsTo: 0
   turnOrder: {fileID: 0}
   pOneMine: {fileID: 0}
   pTwoMine: {fileID: 0}
+  oneMines: []
+  twoMines: []
+  mineLvl: {fileID: 0}
 --- !u!114 &628825713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10183,24 +10264,7 @@ MonoBehaviour:
   turnNum: 1
   phaseNum: 1
   fazeNum: 0
-  addMinText: {fileID: 1297796322}
-  greenSys: {fileID: 2058922975}
-  redSys: {fileID: 628825711}
-  blueSys: {fileID: 584031499}
-  greenSysText: {fileID: 0}
-  redSysText: {fileID: 0}
-  blueSysText: {fileID: 0}
-  greenSystems: 0
-  redSystems: 0
-  blueSystems: 0
-  commonMineralsOne: 50
-  rareMineralsOne: 30
-  vRareMineralsOne: 20
-  commonMineralsTwo: 50
-  rareMineralsTwo: 30
-  vRareMineralsTwo: 20
-  mineLevelOne: 1
-  mineLevelTwo: 1
+  gameController: {fileID: 0}
   playerOne: {fileID: 0}
   playerTwo: {fileID: 0}
   playerNum: 1
@@ -10645,6 +10709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: 1
   GC: {fileID: 0}
+  shipObject: {fileID: 0}
   arrComponents:
   - {fileID: 761909289}
   - {fileID: 761909294}
@@ -10661,13 +10726,16 @@ MonoBehaviour:
   numGenerators: 1
   numMissiles: 1
   numAntiMissile: 1
-  numCriticalHits: 4
-  numArmor: 2
   numEngines: 1
   numRepairSys: 0
   numCommandSys: 0
+  numCriticalHits: 4
+  numArmor: 2
   maxComponents: 5
   slotsUsed: 5
+  numAttacksRemaining: 0
+  numRepairsUsed: 0
+  numAssaults: 0
   numSpaceMarines: 4
   numActiveMarines: 4
   numEnemyMarines: 0
@@ -12049,6 +12117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popUpBox: {fileID: 926595003}
   IF: {fileID: 0}
+  clicked: 0
 --- !u!1 &935881389
 GameObject:
   m_ObjectHideFlags: 0
@@ -16300,6 +16369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: 1
   GC: {fileID: 0}
+  shipObject: {fileID: 0}
   arrComponents: []
   marines: []
   enemyMarines: []
@@ -16307,13 +16377,16 @@ MonoBehaviour:
   numGenerators: 0
   numMissiles: 0
   numAntiMissile: 0
-  numCriticalHits: 0
-  numArmor: 4
   numEngines: 1
   numRepairSys: 0
   numCommandSys: 0
+  numCriticalHits: 0
+  numArmor: 4
   maxComponents: 5
   slotsUsed: 0
+  numAttacksRemaining: 0
+  numRepairsUsed: 0
+  numAssaults: 0
   numSpaceMarines: 0
   numActiveMarines: 0
   numEnemyMarines: 0
@@ -18964,9 +19037,14 @@ MonoBehaviour:
   playerOneSys: 0
   playerTwoSys: 0
   pTurn: 1
+  minerLevel: 0
+  belongsTo: 0
   turnOrder: {fileID: 0}
   pOneMine: {fileID: 197163674}
   pTwoMine: {fileID: 851029968}
+  oneMines: []
+  twoMines: []
+  mineLvl: {fileID: 0}
 --- !u!1 &1385683479
 GameObject:
   m_ObjectHideFlags: 0
@@ -22366,6 +22444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: 1
   GC: {fileID: 0}
+  shipObject: {fileID: 0}
   arrComponents:
   - {fileID: 1834418422}
   - {fileID: 1834418423}
@@ -22383,13 +22462,16 @@ MonoBehaviour:
   numGenerators: 1
   numMissiles: 1
   numAntiMissile: 1
-  numCriticalHits: 1
-  numArmor: 3
   numEngines: 1
   numRepairSys: 0
   numCommandSys: 0
+  numCriticalHits: 1
+  numArmor: 3
   maxComponents: 5
   slotsUsed: 5
+  numAttacksRemaining: 0
+  numRepairsUsed: 0
+  numAssaults: 0
   numSpaceMarines: 0
   numActiveMarines: 0
   numEnemyMarines: 0
@@ -24510,9 +24592,14 @@ MonoBehaviour:
   playerOneSys: 0
   playerTwoSys: 0
   pTurn: 1
+  minerLevel: 0
+  belongsTo: 0
   turnOrder: {fileID: 0}
   pOneMine: {fileID: 0}
   pTwoMine: {fileID: 0}
+  oneMines: []
+  twoMines: []
+  mineLvl: {fileID: 0}
 --- !u!114 &2058922978
 MonoBehaviour:
   m_ObjectHideFlags: 0
