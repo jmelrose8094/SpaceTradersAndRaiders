@@ -101,8 +101,12 @@ public class MineralTracker : MonoBehaviour
     {
         if (commonMinerals[i] >= 30 && rareMinerals[i] >= 10)
         {
-            commonMinerals[i] -= 30;
-            rareMinerals[i] -= 10;
+            if (gameController.GetActiveShip().GetComponent<p_ship>().slotsUsed < gameController.GetActiveShip().GetComponent<p_ship>().maxComponents)
+            {
+                commonMinerals[i] -= 30;
+                rareMinerals[i] -= 10;
+                
+            }
             gameController.GetActiveShip().GetComponent<p_ship>().BuyEngine(1);
         }
     }
@@ -110,9 +114,13 @@ public class MineralTracker : MonoBehaviour
     {
         if (commonMinerals[i] >= 10 && rareMinerals[i] >= 20 && vRareMinerals[i] >= 10)
         {
-            commonMinerals[i] -= 10;
-            rareMinerals[i] -= 20;
-            vRareMinerals[i] -= 10;
+            if (gameController.GetActiveShip().GetComponent<p_ship>().slotsUsed < gameController.GetActiveShip().GetComponent<p_ship>().maxComponents)
+            {
+                commonMinerals[i] -= 10;
+                rareMinerals[i] -= 20;
+                vRareMinerals[i] -= 10;
+                
+            }
             gameController.GetActiveShip().GetComponent<p_ship>().BuyShieldGen(1);
         }
     }
@@ -120,9 +128,13 @@ public class MineralTracker : MonoBehaviour
     {
         if (commonMinerals[i] >= 50 && rareMinerals[i] >= 40 && vRareMinerals[i] >= 30)
         {
-            commonMinerals[i] -= 50;
-            rareMinerals[i] -= 40;
-            vRareMinerals[i] -= 30;
+            if (gameController.GetActiveShip().GetComponent<p_ship>().slotsUsed < gameController.GetActiveShip().GetComponent<p_ship>().maxComponents)
+            {
+                commonMinerals[i] -= 50;
+                rareMinerals[i] -= 40;
+                vRareMinerals[i] -= 30;
+                
+            }
             gameController.GetActiveShip().GetComponent<p_ship>().BuyRepairSys(1);
         }
     }
@@ -130,9 +142,13 @@ public class MineralTracker : MonoBehaviour
     {
         if (commonMinerals[i] >= 20 && rareMinerals[i] >= 10 && vRareMinerals[i] >= 10)
         {
-            commonMinerals[i] -= 20;
-            rareMinerals[i] -= 10;
-            vRareMinerals[i] -= 10;
+            if (gameController.GetActiveShip().GetComponent<p_ship>().slotsUsed < gameController.GetActiveShip().GetComponent<p_ship>().maxComponents)
+            {
+                commonMinerals[i] -= 20;
+                rareMinerals[i] -= 10;
+                vRareMinerals[i] -= 10;
+                
+            }
             gameController.GetActiveShip().GetComponent<p_ship>().BuyCommandSys();
         }
     }
@@ -140,8 +156,12 @@ public class MineralTracker : MonoBehaviour
     {
         if (commonMinerals[i] >= 20 && rareMinerals[i] >= 10)
         {
-            commonMinerals[i] -= 20;
-            rareMinerals[i] -= 10;
+            if (gameController.GetActiveShip().GetComponent<p_ship>().slotsUsed < gameController.GetActiveShip().GetComponent<p_ship>().maxComponents)
+            {
+                commonMinerals[i] -= 20;
+                rareMinerals[i] -= 10;
+                
+            }
             gameController.GetActiveShip().GetComponent<p_ship>().BuyMissileLauncher(1);
         }
     }
@@ -149,9 +169,13 @@ public class MineralTracker : MonoBehaviour
     {
         if (commonMinerals[i] >= 30 && rareMinerals[i] >= 20 && vRareMinerals[i] >= 10)
         {
-            commonMinerals[i] -= 30;
-            rareMinerals[i] -= 20;
-            vRareMinerals[i] -= 10;
+            if (gameController.GetActiveShip().GetComponent<p_ship>().slotsUsed < gameController.GetActiveShip().GetComponent<p_ship>().maxComponents)
+            {
+                commonMinerals[i] -= 30;
+                rareMinerals[i] -= 20;
+                vRareMinerals[i] -= 10;
+                
+            }
             gameController.GetActiveShip().GetComponent<p_ship>().BuyAntiMissile(1);
         }
     }
@@ -159,9 +183,13 @@ public class MineralTracker : MonoBehaviour
     {
         if (commonMinerals[i] >= 30 && rareMinerals[i] >= 30 && vRareMinerals[i] >= 10)
         {
-            commonMinerals[i] -= 30;
-            rareMinerals[i] -= 30;
-            vRareMinerals[i] -= 10;
+            if (gameController.GetActiveShip().GetComponent<p_ship>().slotsUsed < gameController.GetActiveShip().GetComponent<p_ship>().maxComponents)
+            {
+                commonMinerals[i] -= 30;
+                rareMinerals[i] -= 30;
+                vRareMinerals[i] -= 10;
+                
+            }
             gameController.GetActiveShip().GetComponent<p_ship>().BuyBeamWep(1);
         }
     }

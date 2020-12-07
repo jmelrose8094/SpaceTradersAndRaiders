@@ -230,25 +230,47 @@ public class GameController : MonoBehaviour
         switch (playerTurnNum)
         {
             case 1:
-                if (shipRef.tag == "p1")
+                if (shipRef.tag == "p1" && activeShip != shipRef)
                 {
                     previousShip = activeShip;
                     activeShip = shipRef;
                 }
-                else if(shipRef.tag == "p2")
+                else if(shipRef.tag != "p1")
                 {
                     activeTarget = shipRef;
                 }
                 break;
             case 2:
-                if (shipRef.tag == "p1")
+                if (shipRef.tag != "p2")
                 {
                     activeTarget = shipRef;
                 }
-                else if (shipRef.tag == "p2")
+                else if (shipRef.tag == "p2" && activeShip != shipRef)
                 {
                     previousShip = activeShip;
                     activeShip = shipRef;
+                }
+                break;
+            case 3:
+                if (shipRef.tag == "p3" && activeShip != shipRef)
+                {
+                    previousShip = activeShip;
+                    activeShip = shipRef;
+                }
+                else if (shipRef.tag != "p3")
+                {
+                    activeTarget = shipRef;
+                }
+                break;
+            case 4:
+                if (shipRef.tag == "p4" && activeShip != shipRef)
+                {
+                    previousShip = activeShip;
+                    activeShip = shipRef;
+                }
+                else if (shipRef.tag != "p4")
+                {
+                    activeTarget = shipRef;
                 }
                 break;
         }

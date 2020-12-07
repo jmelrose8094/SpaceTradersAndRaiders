@@ -40,7 +40,7 @@ public class p_ship : MonoBehaviour
     void OnMouseDown()
     {
         GC.GetComponent<GameController>().SetActiveShip(shipObject);
-    }//*/
+    }
     public p_ship()
     {
         numBeamWeapons = 0;
